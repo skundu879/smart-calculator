@@ -7,7 +7,6 @@ const Colors: Record<string, string> = {
 };
 
 const StackedBar = (props: { title?: string; graphData: any }) => {
-  console.log(props);
   return (
     <div className='w-full'>
       <h1 className='mb-4 font-semibold'>Return Graph</h1>

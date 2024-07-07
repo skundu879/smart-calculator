@@ -35,7 +35,7 @@ const MutualFund = () => {
     );
     setResultData([
       {
-        title: 'Total Investment',
+        title: 'Principal Amount',
         color: 'warning',
         value:
           activeTab === 'SIP'
@@ -43,7 +43,7 @@ const MutualFund = () => {
             : data[params[0]],
       },
       {
-        title: 'Total Interest',
+        title: 'Interest Earned',
         color: 'good',
         value:
           result -
@@ -54,7 +54,6 @@ const MutualFund = () => {
       { title: 'Total Amount', color: null, value: result },
     ]);
   };
-  console.log(resultData);
   return (
     <div className='flex md:flex-row flex-col gap-2'>
       {cardDetailsObj.map((ele, key) => {
