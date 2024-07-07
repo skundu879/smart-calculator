@@ -1,4 +1,4 @@
-export const isEmpty = (value) => {
+export const isEmpty = (value: any) => {
   // Check if value is null or undefined
   if (value === null || value === undefined) {
     return true;
