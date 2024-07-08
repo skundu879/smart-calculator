@@ -33,7 +33,7 @@ const InputCard = ({ cardObject, title, description, executeFormula }: any) => {
   const getTabContent = ({ defaultValue, label, max, step, title }: any) => {
     return (
       <InputSlider
-        defaultValue={[defaultValue]}
+        defaultValue={defaultValue}
         label={label}
         max={max}
         step={step}
