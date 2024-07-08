@@ -1,46 +1,65 @@
-'use client';
-import React, { useState } from 'react';
-import { Slider } from '@/components/ui/slider';
+import React from 'react';
+import { Slider } from './ui/slider';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
+import _ from 'lodash';
 
-type props = {
+interface InputSliderProps {
   label: string;
   max: number;
   step: number;
-  defaultValue: number[];
+  defaultValue: number;
   value: number;
-  handleChange: (ele: any) => void;
-};
+  handleChange: (value: number) => void;
+}
 
-const InputSlider = ({
-  label,
-  max,
-  step,
-  defaultValue,
-  value,
-  handleChange,
-}: props) => {
-  return (
-    <div className='flex flex-col gap-8'>
-      <div className='flex flex-row justify-between items-center'>
-        <Label>{label}</Label>
-        <Input
-          value={value}
-          className='md:w-40 w-24'
-          onChange={(event) => handleChange(event.target.value)}
+const InputSlider: React.FC<InputSliderProps> = React.memo(
+  function InputSlider({
+    label,
+    max,
+    step,
+    defaultValue,
+    value,
+    handleChange,
+  }) {
+    // Debounce handleChange to improve performance
+    const debounceChange = React.useCallback(
+      _.debounce((value: number) => handleChange(value), 10),
+      [handleChange]
+    );
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      debounceChange(Number(event.target.value));
+    };
+
+    const handleSliderChange = (value: number[]) => {
+      debounceChange(value[0]);
+    };
+
+    return (
+      <div className='flex flex-col gap-8'>
+        <div className='flex flex-row justify-between items-center'>
+          <Label htmlFor='input-slider'>{label}</Label>
+          <Input
+            id='input-slider'
+            type='number'
+            value={value}
+            className='md:w-40 w-24'
+            onChange={handleInputChange}
+          />
+        </div>
+        <Slider
+          defaultValue={[defaultValue]}
+          value={[value]}
+          max={max}
+          step={step}
+          onValueChange={handleSliderChange}
         />
       </div>
-      <Slider
-        defaultValue={[value]}
-        value={[value]}
-        max={max}
-        step={step}
-        onValueChange={(event) => handleChange(event[0])}
-      />
-    </div>
-  );
-};
+    );
+  }
+);
+
+InputSlider.displayName = 'InputSlider';
 
 export default InputSlider;

@@ -1,45 +1,23 @@
-import { title } from 'process';
+import React from 'react';
 import styled from 'styled-components';
 
+// Assuming Colors and other necessary imports are defined elsewhere
 const Colors: Record<string, string> = {
   warning: 'yellow',
   good: 'green',
 };
+// Define proper types for props
+interface GraphDataItem {
+  value: number;
+  total: number;
+  color: keyof typeof Colors; // Assuming Colors is an object with keys
+}
 
-const StackedBar = (props: { title?: string; graphData: any }) => {
-  return (
-    <div className='w-full'>
-      <h1 className='mb-4 font-semibold'>Return Graph</h1>
-      <div
-        style={{
-          display: 'flex',
-          flex: '1 1 auto',
-          alignSelf: 'auto',
-        }}
-      >
-        {props && props.graphData.data ? (
-          props.graphData.data.map((item: any, index: any) => {
-            const percentage = (item.value / item.total) * 100;
-            return (
-              <Rectangle
-                key={index}
-                percentage={percentage}
-                color={Colors[item.color]}
-              />
-            );
-          })
-        ) : (
-          <Rectangle
-            percentage={100}
-            color='grey'
-          />
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default StackedBar;
+interface StackBarProps {
+  graphData: {
+    data?: GraphDataItem[];
+  };
+}
 
 const Rectangle = styled.div<{ percentage: number; color: string }>`
   height: 20px;
@@ -47,7 +25,39 @@ const Rectangle = styled.div<{ percentage: number; color: string }>`
   background-color: ${(props) => props.color};
 `;
 
-const NormalBold = styled.p`
-  font-weight: 700;
-  font-size: var(--font-size-normal);
-`;
+const RectangleMemo = React.memo(Rectangle);
+
+const renderRectangle = (item: GraphDataItem, index: number) => {
+  const percentage = (item.value / item.total) * 100;
+  return (
+    <RectangleMemo
+      key={index} // Consider using a more stable identifier here
+      percentage={percentage}
+      color={Colors[item.color]}
+    />
+  );
+};
+
+const StackBar: React.FC<StackBarProps> = (props) => (
+  <div className='w-full'>
+    <h1 className='mb-4 font-semibold'>Return Graph</h1>
+    <div
+      style={{
+        display: 'flex',
+        flex: '1 1 auto',
+        alignSelf: 'auto',
+      }}
+    >
+      {props.graphData.data && props.graphData.data.length > 0 ? (
+        props.graphData.data.map(renderRectangle)
+      ) : (
+        <RectangleMemo
+          percentage={100}
+          color='grey'
+        />
+      )}
+    </div>
+  </div>
+);
+
+export default React.memo(StackBar);

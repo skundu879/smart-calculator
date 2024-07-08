@@ -17,11 +17,17 @@ const Colors: Record<string, string> = {
   good: 'bg-green-600',
 };
 
+type GraphDataItem = {
+  value: number;
+  total: number;
+  color: string;
+};
+
 type ResultCardProps = {
   data: Array<object>;
   graphData: {
     title: string;
-    data: Array<object>;
+    data: Array<GraphDataItem>;
   };
 };
 

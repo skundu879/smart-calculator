@@ -5,7 +5,6 @@ import { cardDetailsObj } from '@/lib/cardDetails';
 import InputCard from '@/components/InputCard';
 import { dynamicMathCalculation } from '@/utils/dynamicMathCalculation';
 import { isEmpty } from '@/utils/emptyValidation';
-import { Result } from 'postcss';
 import ResultCard from '@/components/ResultCard';
 
 const MutualFund = () => {
@@ -33,6 +32,12 @@ const MutualFund = () => {
           dynamicFuntion(data[params[0]], data[params[1]], data[params[2]])
         )
     );
+    let interestEarned =
+      result -
+      (activeTab === 'SIP'
+        ? data[params[0]] * data[params[2]] * 12
+        : data[params[0]]);
+    // let taxDeductible = interestEarned > 100000 ?
     setResultData([
       {
         title: 'Principal Amount',
@@ -45,31 +50,25 @@ const MutualFund = () => {
       {
         title: 'Interest Earned',
         color: 'good',
-        value:
-          result -
-          (activeTab === 'SIP'
-            ? data[params[0]] * data[params[2]] * 12
-            : data[params[0]]),
+        value: interestEarned,
       },
       { title: 'Total Amount', color: null, value: result },
     ]);
   };
+
   return (
     <div className='flex md:flex-row flex-col gap-2'>
       {cardDetailsObj.map((ele, key) => {
         if (ele.cardTitle === pathSegments) {
           return (
-            <>
-              {' '}
+            <React.Fragment key={key}>
               <InputCard
                 cardObject={ele.calculationDetails}
                 title={cardTitle}
                 description={cardDescription}
                 executeFormula={executeFormula}
-                key={key}
               />
               <ResultCard
-                key={key}
                 data={resultData}
                 graphData={{
                   title: 'Total Investment',
@@ -87,9 +86,10 @@ const MutualFund = () => {
                   ],
                 }}
               />
-            </>
+            </React.Fragment>
           );
         }
+        return null;
       })}
     </div>
   );

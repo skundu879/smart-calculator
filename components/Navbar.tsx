@@ -7,6 +7,7 @@ const Navbar = () => {
       <Link
         href='/'
         className='text-2xl font-bold text-slate-950 flex flex-row items-center'
+        aria-label='QuickCalc Home'
       >
         <h2 className='text-3xl font-semibold tracking-tight mt-2 w-full'>
           QuickCalc
