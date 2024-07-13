@@ -39,9 +39,9 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
     return (
       <div className='flex flex-col gap-8'>
         <div className='flex flex-row justify-between items-center'>
-          <Label htmlFor='input-slider'>{label}</Label>
+          <Label htmlFor={`input-slider-${label}`}>{label}</Label>
           <Input
-            id='input-slider'
+            id={`input-slider-${label}`}
             type='number'
             value={value}
             className='md:w-40 w-24'

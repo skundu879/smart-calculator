@@ -6,6 +6,7 @@ import InputCard from '@/components/InputCard';
 import { dynamicMathCalculation } from '@/utils/dynamicMathCalculation';
 import { isEmpty } from '@/utils/emptyValidation';
 import ResultCard from '@/components/ResultCard';
+import { calculatePercentOfNumber } from '@/utils/calculateParcentOfNumber';
 
 const MutualFund = () => {
   const router = usePathname();
@@ -16,6 +17,11 @@ const MutualFund = () => {
   const [resultData, setResultData] = useState([
     { title: 'Total Investment', color: 'warning', value: 0 },
     { title: 'Total Interest', color: 'good', value: 0 },
+    {
+      title: 'Est. Tax',
+      color: 'bad',
+      value: 0,
+    },
     { title: 'Total Amount', color: null, value: 0 },
   ]);
 
@@ -37,7 +43,10 @@ const MutualFund = () => {
       (activeTab === 'SIP'
         ? data[params[0]] * data[params[2]] * 12
         : data[params[0]]);
-    // let taxDeductible = interestEarned > 100000 ?
+    let taxDeductible =
+      interestEarned >= 100000
+        ? calculatePercentOfNumber(10, interestEarned)
+        : 0;
     setResultData([
       {
         title: 'Principal Amount',
@@ -52,7 +61,16 @@ const MutualFund = () => {
         color: 'good',
         value: interestEarned,
       },
-      { title: 'Total Amount', color: null, value: result },
+      {
+        title: 'Est. Tax',
+        color: 'bad',
+        value: taxDeductible,
+      },
+      {
+        title: 'Total Amount',
+        color: null,
+        value: result - taxDeductible,
+      },
     ]);
   };
 
@@ -75,13 +93,18 @@ const MutualFund = () => {
                   data: [
                     {
                       value: resultData[0].value,
-                      total: resultData[2].value,
+                      total: resultData[3].value,
                       color: 'warning',
                     },
                     {
                       value: resultData[1].value,
-                      total: resultData[2].value,
+                      total: resultData[3].value,
                       color: 'good',
+                    },
+                    {
+                      value: resultData[2].value,
+                      total: resultData[3].value,
+                      color: 'bad',
                     },
                   ],
                 }}

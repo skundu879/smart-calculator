@@ -15,6 +15,7 @@ import { abbreviateNumber } from '@/utils/abbreviateNumber';
 const Colors: Record<string, string> = {
   warning: 'bg-yellow-300',
   good: 'bg-green-600',
+  bad: 'bg-red-600',
 };
 
 type GraphDataItem = {

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Colors: Record<string, string> = {
   warning: 'yellow',
   good: 'green',
+  bad: 'red',
 };
 // Define proper types for props
 interface GraphDataItem {
