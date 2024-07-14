@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import './globals.css';
+import StoreProvider from './StoreProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <main className='flex justify-center'>
-          <Navbar />
-          <div className='sm:w-3/4 mt-24'>{children}</div>
+          <StoreProvider>
+            <Navbar />
+            <div className='sm:w-3/4 mt-24'>{children}</div>
+          </StoreProvider>
         </main>
       </body>
     </html>
