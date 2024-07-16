@@ -7,6 +7,7 @@ import _ from 'lodash';
 interface InputSliderProps {
   label: string;
   max: number;
+  min: number;
   step: number;
   defaultValue: number;
   value: number;
@@ -17,6 +18,7 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
   function InputSlider({
     label,
     max,
+    min,
     step,
     defaultValue,
     value,
@@ -46,12 +48,16 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
             value={value}
             className='md:w-40 w-24'
             onChange={handleInputChange}
+            step={step}
+            min={min}
+            max={max}
           />
         </div>
         <Slider
           defaultValue={[defaultValue]}
           value={[value]}
           max={max}
+          min={min}
           step={step}
           onValueChange={handleSliderChange}
         />

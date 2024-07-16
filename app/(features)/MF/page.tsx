@@ -72,6 +72,7 @@ const MutualFund = () => {
         value: result - taxDeductible,
       },
     ]);
+    return result;
   };
 
   return (

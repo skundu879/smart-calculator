@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import MutualFundSlice from './featureSlice/mutualFundSlice';
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: {
+      mutualFund: MutualFundSlice,
+    },
   });
 };
 

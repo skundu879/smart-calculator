@@ -1,4 +1,5 @@
 import { CardProps } from '@/interface/cardProps';
+import { min } from 'lodash';
 import { title } from 'process';
 
 export const cardDetailsObj: Array<CardProps> = [
@@ -19,6 +20,7 @@ export const cardDetailsObj: Array<CardProps> = [
             label: 'Monthly Investment (in Rupees)',
             defaultValue: 5000,
             max: 100000,
+            min: 500,
             step: 500,
           },
           {
@@ -27,6 +29,7 @@ export const cardDetailsObj: Array<CardProps> = [
             label: 'Expected return rate (per year)',
             defaultValue: 12,
             max: 50,
+            min: 1,
             step: 1,
           },
           {
@@ -35,6 +38,7 @@ export const cardDetailsObj: Array<CardProps> = [
             label: 'Time Period (in Year)',
             defaultValue: 5,
             max: 60,
+            min: 0.5,
             step: 0.5,
           },
         ],
@@ -46,6 +50,7 @@ export const cardDetailsObj: Array<CardProps> = [
             defaultValue: 100000,
             max: 1000000,
             step: 1000,
+            min: 500,
           },
           {
             id: 2,
@@ -54,6 +59,7 @@ export const cardDetailsObj: Array<CardProps> = [
             defaultValue: 12,
             max: 50,
             step: 1,
+            min: 1,
           },
           {
             id: 3,
@@ -62,6 +68,7 @@ export const cardDetailsObj: Array<CardProps> = [
             defaultValue: 10,
             max: 60,
             step: 0.5,
+            min: 0.5,
           },
         ],
       },
@@ -79,17 +86,22 @@ export const cardDetailsObj: Array<CardProps> = [
       results: {
         SIP: [
           {
-            title: 'Invested amount',
+            title: 'Principal Amount',
             color: 'warning',
             formula: 'investment*(months*12)',
           },
           {
-            title: 'Estimated return',
+            title: 'Interest Earned',
             color: 'good',
             formula: '(result-investment*(months*12))',
           },
           {
-            title: 'Total value',
+            title: 'Est. Tax',
+            color: 'bad',
+            formula: '(10/100)*(result-investment*(months*12)',
+          },
+          {
+            title: 'Total Amount',
             color: null,
             formula: 'result',
           },

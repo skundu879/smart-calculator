@@ -10,17 +10,19 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { isEmpty } from '@/utils/emptyValidation';
+import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
+import {
+  activeTabSelector,
+  setActivetab,
+  setFormDatas,
+  formDataSelector,
+} from '@/lib/featureSlice/mutualFundSlice';
 
 const InputCard = ({ cardObject, title, description, executeFormula }: any) => {
-  const [activeTab, setActiveTab] = useState('SIP');
-  const [inputValues, setInputValues] = useState<{
-    SIP: { [key: string]: any };
-    LUMPSUM: { [key: string]: any };
-    [key: string]: { [key: string]: any };
-  }>({
-    SIP: {},
-    LUMPSUM: {},
-  });
+  const dispatch = useAppDispatch();
+  const activeTab = useAppSelector((state) => activeTabSelector(state));
+  const formData = useAppSelector((state) => formDataSelector(state));
+  console.log('formData', formData);
 
   const getTabList = (tab: string, key: number) => (
     <TabsTrigger
@@ -30,47 +32,48 @@ const InputCard = ({ cardObject, title, description, executeFormula }: any) => {
       {tab}
     </TabsTrigger>
   );
-  const getTabContent = ({ defaultValue, label, max, step, title }: any) => {
+  const getTabContent = ({
+    defaultValue,
+    label,
+    max,
+    min,
+    step,
+    title,
+  }: any) => {
     return (
       <InputSlider
         defaultValue={defaultValue}
         label={label}
         max={max}
+        min={min}
         step={step}
         handleChange={(ele) => handleChange(ele, title)}
         key={title}
-        value={inputValues[activeTab][title]}
+        value={formData[title]}
       />
     );
   };
   const onTabValueChange = (tab: string) => {
-    setActiveTab(tab);
+    dispatch(setActivetab(tab));
   };
   const handleChange = (ele: any, title: string) => {
-    setInputValues({
-      ...inputValues,
-      [activeTab]: { ...inputValues[activeTab], [title]: ele },
-    });
+    dispatch(setFormDatas({ title, value: ele }));
   };
   useEffect(() => {
     cardObject.inputFields[activeTab].forEach((element: any) => {
-      setInputValues((inputValues) => ({
-        ...inputValues,
-        [activeTab]: {
-          ...inputValues[activeTab],
-          [element.title]: element.defaultValue,
-        },
-      }));
+      dispatch(
+        setFormDatas({ title: element.title, value: element.defaultValue })
+      );
     });
-  }, [activeTab, cardObject.inputFields]);
+  }, [activeTab, cardObject.inputFields, dispatch]);
   useEffect(() => {
-    executeFormula(
-      inputValues[activeTab],
+    const result = executeFormula(
+      formData,
       cardObject.formulas[activeTab].params,
       cardObject.formulas[activeTab].formula,
       activeTab
     );
-  }, [inputValues, activeTab]);
+  }, [formData, activeTab]);
   return (
     <Card className='sm:w-3/5'>
       <CardHeader>
@@ -91,7 +94,7 @@ const InputCard = ({ cardObject, title, description, executeFormula }: any) => {
             value={activeTab}
             className='flex flex-col gap-8'
           >
-            {!isEmpty(inputValues[activeTab]) &&
+            {!isEmpty(formData) &&
               cardObject.inputFields[activeTab].map((field: any) => {
                 return getTabContent(field);
               })}
