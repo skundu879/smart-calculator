@@ -1,6 +1,4 @@
 import { CardProps } from '@/interface/cardProps';
-import { min } from 'lodash';
-import { title } from 'process';
 
 export const cardDetailsObj: Array<CardProps> = [
   {
@@ -86,41 +84,70 @@ export const cardDetailsObj: Array<CardProps> = [
       results: {
         SIP: [
           {
+            params: ['investment', 'months'],
             title: 'Principal Amount',
+            lebel: 'principalAmount',
             color: 'warning',
             formula: 'investment*(months*12)',
+            isGraph: true,
           },
           {
+            params: ['investment', 'result', 'months'],
             title: 'Interest Earned',
+            lebel: 'interestEarned',
             color: 'good',
             formula: '(result-investment*(months*12))',
+            isGraph: true,
           },
           {
+            params: ['investment', 'result', 'months'],
             title: 'Est. Tax',
+            lebel: 'estTax',
             color: 'bad',
-            formula: '(10/100)*(result-investment*(months*12)',
+            formula: '(10/100)*(result-(investment*months*12)-100000)',
+            isGraph: true,
           },
           {
+            params: ['result', 'investment', 'months'],
             title: 'Total Amount',
-            color: null,
-            formula: 'result',
+            lebel: 'totalAmount',
+            color: '',
+            formula: 'result-((10/100)*(result-(investment*months*12)-100000))',
+            isGraph: false,
           },
         ],
         LUMPSUM: [
           {
+            params: ['principal'],
             title: 'Invested amount',
+            lebel: 'principalAmount',
             color: 'warning',
             formula: 'principal',
+            isGraph: true,
           },
           {
-            title: 'Estimated return',
+            params: ['principal', 'result'],
+            title: 'Interest Earned',
+            lebel: 'interestEarned',
             color: 'good',
             formula: '(result-principal)',
+            isGraph: true,
           },
           {
-            title: 'Total value',
-            color: null,
-            formula: 'result',
+            params: ['principal', 'result'],
+            title: 'Est. Tax',
+            lebel: 'estTax',
+            color: 'bad',
+            formula: '(10/100)*(result-(principal)-100000)',
+            isGraph: true,
+          },
+          {
+            params: ['principal', 'result'],
+            title: 'Total Amount',
+            lebel: 'totalAmount',
+            color: '',
+            formula: 'result-((10/100)*(result-principal-100000))',
+            isGraph: false,
           },
         ],
       },

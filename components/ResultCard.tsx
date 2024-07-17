@@ -11,6 +11,12 @@ import { Label } from './ui/label';
 import StackedBar from './StackBar';
 import { cn } from '@/lib/utils';
 import { abbreviateNumber } from '@/utils/abbreviateNumber';
+import {
+  calculatedDataByTabSelector,
+  activeTabSelector,
+} from '@/lib/featureSlice/mutualFundSlice';
+import { useAppSelector } from '@/hooks/hooks';
+import Disclaimer from './Disclaimer';
 
 const Colors: Record<string, string> = {
   warning: 'bg-yellow-300',
@@ -24,16 +30,22 @@ type GraphDataItem = {
   color: string;
 };
 
-type ResultCardProps = {
-  data: Array<object>;
-  graphData: {
-    title: string;
-    data: Array<GraphDataItem>;
-  };
+type ResultDetailItem = {
+  title: string;
+  color?: string;
+  lebel?: string;
 };
 
-const ResultCard = ({ data, graphData }: ResultCardProps) => {
-  const resultContent = (title: string, value: number, color?: string) => {
+type ResultCardProps = {
+  resultDetails: Record<string, ResultDetailItem[]>;
+};
+
+const ResultCard = ({ resultDetails }: ResultCardProps) => {
+  const activeTab = useAppSelector((state) => activeTabSelector(state));
+  const calculatedData = useAppSelector((state) =>
+    calculatedDataByTabSelector(state)
+  );
+  const resultContent = (title: string, lebel: string, color?: string) => {
     return (
       <div className='flex flex-row justify-between items-center mt-6'>
         <Label className='flex flex-row items-center'>
@@ -42,10 +54,28 @@ const ResultCard = ({ data, graphData }: ResultCardProps) => {
             <div className={cn(Colors[color], ' ml-2 h-2 w-8 rounded-md')} />
           )}
         </Label>
-        <Label>{abbreviateNumber(value)}</Label>
+        <Label>{abbreviateNumber(calculatedData[lebel])}</Label>
       </div>
     );
   };
+
+  const getGrpahData = (
+    resultDetails: Array<ResultDetailItem>,
+    calculatedBytabData: any
+  ) => {
+    const graphData: GraphDataItem[] = [];
+    resultDetails.map((ele: any) => {
+      if (ele.isGraph) {
+        graphData.push({
+          value: calculatedBytabData[ele.lebel],
+          total: calculatedBytabData['totalAmount'],
+          color: ele.color,
+        });
+      }
+    });
+    return graphData;
+  };
+
   return (
     <Card className='w-96'>
       <CardHeader>
@@ -55,13 +85,16 @@ const ResultCard = ({ data, graphData }: ResultCardProps) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {data.map((ele: any) => {
-          return resultContent(ele.title, ele.value, ele.color);
+        {resultDetails[activeTab].map((ele: any) => {
+          return resultContent(ele.title, ele.lebel, ele.color);
         })}
       </CardContent>
       <CardFooter className='mt-8'>
-        <StackedBar graphData={graphData} />
+        <StackedBar
+          graphData={getGrpahData(resultDetails[activeTab], calculatedData)}
+        />
       </CardFooter>
+      <Disclaimer />
     </Card>
   );
 };

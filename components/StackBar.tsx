@@ -15,9 +15,7 @@ interface GraphDataItem {
 }
 
 interface StackBarProps {
-  graphData: {
-    data?: GraphDataItem[];
-  };
+  graphData: GraphDataItem[];
 }
 
 const Rectangle = styled.div<{ percentage: number; color: string }>`
@@ -49,8 +47,8 @@ const StackBar: React.FC<StackBarProps> = (props) => (
         alignSelf: 'auto',
       }}
     >
-      {props.graphData.data && props.graphData.data.length > 0 ? (
-        props.graphData.data.map(renderRectangle)
+      {props.graphData && props.graphData.length > 0 ? (
+        props.graphData.map(renderRectangle)
       ) : (
         <RectangleMemo
           percentage={100}

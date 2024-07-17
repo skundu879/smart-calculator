@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import InputSlider from '@/components/InputSlider';
 import {
   Card,
@@ -16,13 +16,30 @@ import {
   setActivetab,
   setFormDatas,
   formDataSelector,
+  calculateMutualFund,
 } from '@/lib/featureSlice/mutualFundSlice';
 
-const InputCard = ({ cardObject, title, description, executeFormula }: any) => {
+interface CardObjectTypes {
+  tabsList: string[];
+  inputFields: Record<string, any>[];
+  formulas: Record<string, any>;
+  results: Record<string, any>;
+}
+
+interface InputCardProps {
+  cardObject: CardObjectTypes; // Adjust according to actual shape
+  title: string;
+  description: string;
+}
+
+const InputCard: React.FC<InputCardProps> = ({
+  cardObject,
+  title,
+  description,
+}): ReactElement => {
   const dispatch = useAppDispatch();
-  const activeTab = useAppSelector((state) => activeTabSelector(state));
+  const activeTab: any = useAppSelector((state) => activeTabSelector(state));
   const formData = useAppSelector((state) => formDataSelector(state));
-  console.log('formData', formData);
 
   const getTabList = (tab: string, key: number) => (
     <TabsTrigger
@@ -67,11 +84,11 @@ const InputCard = ({ cardObject, title, description, executeFormula }: any) => {
     });
   }, [activeTab, cardObject.inputFields, dispatch]);
   useEffect(() => {
-    const result = executeFormula(
-      formData,
-      cardObject.formulas[activeTab].params,
-      cardObject.formulas[activeTab].formula,
-      activeTab
+    dispatch(
+      calculateMutualFund({
+        formula: cardObject.formulas,
+        resultFormuala: cardObject.results,
+      })
     );
   }, [formData, activeTab]);
   return (

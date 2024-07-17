@@ -1,11 +1,13 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { set } from 'lodash';
+import { dynamicMathCalculation } from '@/utils/dynamicMathCalculation';
+import { result } from 'lodash';
 
 type MutualFund = {
   data: {
     [key: string]: any;
   };
+  result: number;
   calculatedData: {
     [key: string]: any;
   };
@@ -20,6 +22,7 @@ const initialState: MutualFund = {
     LUMPSUM: {},
     GOALS: {},
   },
+  result: 0,
   calculatedData: {
     SIP: {},
     LUMPSUM: {},
@@ -49,11 +52,32 @@ const MutualFundSlice = createSlice({
       const { title, value } = action.payload;
       state.data[activeTab][title] = value;
     },
-    setCalculatedData: (state, action) => {
+    calculateMutualFund: (state, action) => {
       const activeTab = state.activeTab;
-      const { formula } = action.payload;
+      const calculatedData = state.calculatedData;
+      const data = state.data[activeTab];
+      const { formula, resultFormuala } = action.payload;
 
-      state.calculatedData[activeTab][title] = value;
+      const dynamicFunctionCall = dynamicMathCalculation(
+        formula[activeTab].params,
+        formula[activeTab].formula
+      );
+      let result = dynamicFunctionCall(...Object.values(data));
+      resultFormuala[activeTab].forEach((element: any) => {
+        const dynamicFunction = dynamicMathCalculation(
+          element.params,
+          element.formula
+        );
+        const dataSet = element.params.map((param: string) => {
+          if (param === 'result') {
+            return result;
+          } else {
+            return data[param];
+          }
+        });
+
+        calculatedData[activeTab][element.lebel] = dynamicFunction(...dataSet);
+      });
     },
   },
 });
@@ -63,7 +87,7 @@ export const {
   setIstaxable,
   setIsLoading,
   setFormDatas,
-  setCalculatedData,
+  calculateMutualFund,
 } = MutualFundSlice.actions;
 export default MutualFundSlice.reducer;
 
@@ -84,7 +108,8 @@ export const formDataSelector = createSelector(
   (state: RootState) => state.mutualFund.activeTab,
   (data, activeTab) => data[activeTab]
 );
-export const calculatedDataSelector = createSelector(
+export const calculatedDataByTabSelector = createSelector(
   (state: RootState) => state.mutualFund.calculatedData,
-  (calculatedData) => calculatedData
+  (state: RootState) => state.mutualFund.activeTab,
+  (calculatedData, activeTab) => calculatedData[activeTab]
 );
