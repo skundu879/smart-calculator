@@ -75,8 +75,18 @@ const MutualFundSlice = createSlice({
             return data[param];
           }
         });
-
-        calculatedData[activeTab][element.lebel] = dynamicFunction(...dataSet);
+        if (
+          (element.lebel === 'estTax' || element.lebel === 'totalAmount') &&
+          calculatedData[activeTab].interestEarned < 100000
+        ) {
+          calculatedData[activeTab]['estTax'] = 0;
+          calculatedData[activeTab]['totalAmount'] = result;
+        } else {
+          calculatedData[activeTab][element.lebel] = dynamicFunction(
+            ...dataSet
+          );
+        }
+        // calculatedData[activeTab][element.lebel] = dynamicFunction(...dataSet);
       });
     },
   },
