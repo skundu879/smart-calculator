@@ -15,6 +15,7 @@ export type CardProps = {
         max: number;
         min: number;
         step: number;
+        isDisabled?: boolean;
       }>;
     };
     formulas: {

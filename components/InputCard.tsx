@@ -10,15 +10,6 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { isEmpty } from '@/utils/emptyValidation';
-import { useAppSelector, useAppDispatch } from '@/hooks/hooks';
-import {
-  activeTabSelector,
-  setActivetab,
-  setFormDatas,
-  formDataSelector,
-  calculateMutualFund,
-} from '@/lib/featureSlice/mutualFundSlice';
-
 interface CardObjectTypes {
   tabsList: string[];
   inputFields: Record<string, any>[];
@@ -30,17 +21,24 @@ interface InputCardProps {
   cardObject: CardObjectTypes; // Adjust according to actual shape
   title: string;
   description: string;
+  setActivetab: (tab: string) => void;
+  setFormDatas: (data: any) => void;
+  calculateMutualFund: (data: any) => void; // Add this line
+  activeTab: any;
+  formData: any;
 }
 
 const InputCard: React.FC<InputCardProps> = ({
   cardObject,
   title,
   description,
+  setActivetab,
+  setFormDatas,
+  calculateMutualFund,
+  activeTab,
+  formData,
 }): ReactElement => {
-  const dispatch = useAppDispatch();
-  const activeTab: any = useAppSelector((state) => activeTabSelector(state));
-  const formData = useAppSelector((state) => formDataSelector(state));
-
+  console.log('formData', formData, activeTab);
   const getTabList = (tab: string, key: number) => (
     <TabsTrigger
       value={tab}
@@ -56,6 +54,7 @@ const InputCard: React.FC<InputCardProps> = ({
     min,
     step,
     title,
+    isDisabled,
   }: any) => {
     return (
       <InputSlider
@@ -67,30 +66,27 @@ const InputCard: React.FC<InputCardProps> = ({
         handleChange={(ele) => handleChange(ele, title)}
         key={title}
         value={formData[title]}
+        isDisabled={isDisabled}
       />
     );
   };
   const onTabValueChange = (tab: string) => {
-    dispatch(setActivetab(tab));
+    setActivetab(tab);
   };
   const handleChange = (ele: any, title: string) => {
-    dispatch(setFormDatas({ title, value: ele }));
+    setFormDatas({ title, value: ele });
   };
   useEffect(() => {
     cardObject.inputFields[activeTab].forEach((element: any) => {
-      dispatch(
-        setFormDatas({ title: element.title, value: element.defaultValue })
-      );
+      setFormDatas({ title: element.title, value: element.defaultValue });
     });
-  }, [activeTab, cardObject.inputFields, dispatch]);
+  }, [activeTab, cardObject.inputFields]);
   useEffect(() => {
-    dispatch(
-      calculateMutualFund({
-        formula: cardObject.formulas,
-        resultFormuala: cardObject.results,
-      })
-    );
-  }, [formData, activeTab]);
+    calculateMutualFund({
+      formula: cardObject.formulas,
+      resultFormuala: cardObject.results,
+    });
+  }, [activeTab, formData]);
   return (
     <Card className='sm:w-3/5'>
       <CardHeader>

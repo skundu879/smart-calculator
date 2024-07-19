@@ -11,6 +11,7 @@ interface InputSliderProps {
   step: number;
   defaultValue: number;
   value: number;
+  isDisabled?: boolean;
   handleChange: (value: number) => void;
 }
 
@@ -22,6 +23,7 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
     step,
     defaultValue,
     value,
+    isDisabled,
     handleChange,
   }) {
     // Debounce handleChange to improve performance
@@ -51,16 +53,20 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
             step={step}
             min={min}
             max={max}
+            disabled={isDisabled}
           />
         </div>
-        <Slider
-          defaultValue={[defaultValue]}
-          value={[value]}
-          max={max}
-          min={min}
-          step={step}
-          onValueChange={handleSliderChange}
-        />
+        {!isDisabled && (
+          <Slider
+            defaultValue={[defaultValue]}
+            value={[value]}
+            max={max}
+            min={min}
+            step={step}
+            onValueChange={handleSliderChange}
+            disabled={isDisabled}
+          />
+        )}
       </div>
     );
   }

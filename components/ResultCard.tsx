@@ -11,11 +11,6 @@ import { Label } from './ui/label';
 import StackedBar from './StackBar';
 import { cn } from '@/lib/utils';
 import { abbreviateNumber } from '@/utils/abbreviateNumber';
-import {
-  calculatedDataByTabSelector,
-  activeTabSelector,
-} from '@/lib/featureSlice/mutualFundSlice';
-import { useAppSelector } from '@/hooks/hooks';
 import Disclaimer from './Disclaimer';
 
 const Colors: Record<string, string> = {
@@ -37,14 +32,12 @@ type ResultDetailItem = {
 };
 
 type ResultCardProps = {
-  resultDetails: Record<string, ResultDetailItem[]>;
+  resultDetails: ResultDetailItem[];
+  calculatedData: Record<string, number>;
 };
 
-const ResultCard = ({ resultDetails }: ResultCardProps) => {
-  const activeTab = useAppSelector((state) => activeTabSelector(state));
-  const calculatedData = useAppSelector((state) =>
-    calculatedDataByTabSelector(state)
-  );
+const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
+  console.log('resultDetails', resultDetails, calculatedData);
   const resultContent = (title: string, lebel: string, color?: string) => {
     return (
       <div className='flex flex-row justify-between items-center mt-6'>
@@ -80,19 +73,15 @@ const ResultCard = ({ resultDetails }: ResultCardProps) => {
     <Card className='w-96'>
       <CardHeader>
         <CardTitle>Estimated Return</CardTitle>
-        <CardDescription>
-          Review Your Estimated Mutual Fund Payout
-        </CardDescription>
+        <CardDescription>Review Your Estimated Payout</CardDescription>
       </CardHeader>
       <CardContent>
-        {resultDetails[activeTab].map((ele: any) => {
+        {resultDetails.map((ele: any) => {
           return resultContent(ele.title, ele.lebel, ele.color);
         })}
       </CardContent>
       <CardFooter className='mt-8'>
-        <StackedBar
-          graphData={getGrpahData(resultDetails[activeTab], calculatedData)}
-        />
+        <StackedBar graphData={getGrpahData(resultDetails, calculatedData)} />
       </CardFooter>
       <Disclaimer />
     </Card>

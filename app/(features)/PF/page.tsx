@@ -12,13 +12,13 @@ import {
   formDataSelector,
   calculateMutualFund,
   calculatedDataByTabSelector,
-} from '@/lib/featureSlice/mutualFundSlice';
+} from '@/lib/featureSlice/PF/ProvidentFundSlice';
 
-const cardTitle = 'Mutual Fund Calculator';
+const cardTitle = 'Provident Fund Calculator';
 const cardDescription =
-  'The following tabs allow you to choose between SIP and lumpsum investment.';
+  'The following tabs allow you to choose between EPF, PPF and GPF investment.';
 
-const MutualFund = () => {
+const ProvidentFund = () => {
   const router = usePathname();
   const pathSegments = router.split('/')[1];
   const activeTab: any = useAppSelector((state) => activeTabSelector(state));
@@ -73,4 +73,4 @@ const MutualFund = () => {
   );
 };
 
-export default MutualFund;
+export default ProvidentFund;
