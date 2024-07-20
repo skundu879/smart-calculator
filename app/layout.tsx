@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import './globals.css';
 import StoreProvider from './StoreProvider';
 
@@ -19,10 +20,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <main className='flex justify-center'>
+        <main className='flex flex-col justify-center items-center'>
           <StoreProvider>
             <Navbar />
-            <div className='sm:w-3/4 mt-24'>{children}</div>
+            <div className='sm:w-3/4 w-fit mt-24'>{children}</div>
+            <Footer />
           </StoreProvider>
         </main>
       </body>

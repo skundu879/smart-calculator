@@ -16,7 +16,7 @@ import {
 
 const cardTitle = 'Provident Fund Calculator';
 const cardDescription =
-  'The following tabs allow you to choose between EPF, PPF and GPF investment.';
+  'Calculate your future retirement corpus for EPF, PPF, or GPF with our easy-to-use tool. Get insights based on government rates';
 
 const ProvidentFund = () => {
   const router = usePathname();

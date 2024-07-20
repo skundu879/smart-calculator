@@ -157,7 +157,7 @@ export const cardDetailsObj: Array<CardProps> = [
     cardTitle: 'PF',
     cardDescription: 'Provident Fund',
     cardContent:
-      'Calculate your future PF accumulation considering investment amount, interest rate, and investment period.',
+      'Calculate your future retirement corpus for EPF, PPF, or GPF with our easy-to-use tool.',
     cardIcon: 'undraw_vault.svg',
     cardUrl: '/PF',
     calculationDetails: {
