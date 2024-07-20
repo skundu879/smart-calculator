@@ -23,7 +23,7 @@ export default function RootLayout({
         <main className='flex flex-col justify-center items-center'>
           <StoreProvider>
             <Navbar />
-            <div className='sm:w-3/4 w-fit mt-24'>{children}</div>
+            <div className='sm:container mt-24'>{children}</div>
             <Footer />
           </StoreProvider>
         </main>

@@ -8,7 +8,7 @@ const Footer = () => {
             This site developed & maintained by Sujan Kundu.
           </p>
         </div>
-        <div className='mt-2 flex sm:gap-4 gap-1'>
+        <div className='mt-2 flex sm:gap-2'>
           <a
             href='https://www.facebook.com/sujan.kundu.879'
             className='text-gray-400 hover:text-white mx-2'

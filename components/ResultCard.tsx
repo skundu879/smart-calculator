@@ -70,7 +70,7 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
   };
 
   return (
-    <Card className='w-96'>
+    <Card className='sm:w-[420px] w-full'>
       <CardHeader>
         <CardTitle>Estimated Return</CardTitle>
         <CardDescription>Review Your Estimated Payout</CardDescription>

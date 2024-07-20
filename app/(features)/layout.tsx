@@ -6,7 +6,7 @@ const FeaturesLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <main className=' h-full flex flex-col gap-12 p-4'>
+    <main className=' h-full flex flex-col gap-6 p-4'>
       <CustomBreadcrumb />
       <div>{children}</div>
     </main>
