@@ -45,7 +45,7 @@ const ProvidentFund = () => {
   };
 
   return (
-    <div className='flex md:flex-row flex-col gap-2'>
+    <div className='flex md:flex-row flex-col gap-2 h-full'>
       {cardDetailsObj.map((ele, key) => {
         if (ele.cardTitle === pathSegments) {
           return (

@@ -16,6 +16,8 @@ export type CardProps = {
         min: number;
         step: number;
         isDisabled?: boolean;
+        isTooltip?: boolean;
+        tooltipText?: string;
       }>;
     };
     formulas: {

@@ -55,6 +55,8 @@ const InputCard: React.FC<InputCardProps> = ({
     step,
     title,
     isDisabled,
+    isTooltip,
+    tooltipText,
   }: any) => {
     return (
       <InputSlider
@@ -67,6 +69,8 @@ const InputCard: React.FC<InputCardProps> = ({
         key={title}
         value={formData[title]}
         isDisabled={isDisabled}
+        isTooltip={isTooltip}
+        tooltipText={tooltipText}
       />
     );
   };
@@ -93,7 +97,7 @@ const InputCard: React.FC<InputCardProps> = ({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent className='p-8 '>
+      <CardContent className='px-8 pb-8 '>
         <Tabs
           defaultValue={activeTab}
           onValueChange={onTabValueChange}

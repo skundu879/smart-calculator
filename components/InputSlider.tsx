@@ -3,6 +3,8 @@ import { Slider } from './ui/slider';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import _ from 'lodash';
+import TooltipButton from './TootipButton';
+import Image from 'next/image';
 
 interface InputSliderProps {
   label: string;
@@ -13,6 +15,8 @@ interface InputSliderProps {
   value: number;
   isDisabled?: boolean;
   handleChange: (value: number) => void;
+  isTooltip?: boolean;
+  tooltipText?: string;
 }
 
 const InputSlider: React.FC<InputSliderProps> = React.memo(
@@ -25,6 +29,8 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
     value,
     isDisabled,
     handleChange,
+    isTooltip,
+    tooltipText,
   }) {
     // Debounce handleChange to improve performance
     const debounceChange = React.useCallback(
@@ -43,7 +49,25 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
     return (
       <div className='flex flex-col gap-8'>
         <div className='flex flex-row justify-between items-center'>
-          <Label htmlFor={`input-slider-${label}`}>{label}</Label>
+          <Label
+            htmlFor={`input-slider-${label}`}
+            className='flex flex-row gap-2'
+          >
+            {label}
+            {isTooltip && (
+              <TooltipButton
+                buttonLabel={
+                  <Image
+                    src={'/svg/starIcon.svg'}
+                    alt='Star'
+                    width={14}
+                    height={14}
+                  />
+                }
+                tooltipText={tooltipText || ''}
+              />
+            )}
+          </Label>
           <Input
             id={`input-slider-${label}`}
             type='number'

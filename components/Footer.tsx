@@ -3,7 +3,7 @@ const Footer = () => {
     <footer className='bg-gray-800 text-white m-0 py-4 w-full'>
       <div className='sm:container px-2 flex justify-between'>
         <div>
-          <p className='text-sm'>&copy; 2024 QuickCal.</p>
+          <p className='text-sm font-semibold'>&copy; 2024 QuickCal.</p>
           <p className='text-gray-400 mx-2 text-sm mt-2'>
             This site developed & maintained by Sujan Kundu.
           </p>

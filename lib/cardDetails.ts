@@ -15,20 +15,28 @@ export const cardDetailsObj: Array<CardProps> = [
           {
             id: 1,
             title: 'investment',
-            label: 'Monthly Investment (in Rupees)',
+            label: 'Monthly Investment',
             defaultValue: 5000,
             max: 100000,
             min: 500,
             step: 500,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This refers to the specific amount you contribute towards your SIP each month in indian rupees.',
           },
           {
             id: 2,
             title: 'monthlyInterestRate',
-            label: 'Expected return rate (per year)',
+            label: 'Expected return % (per year)',
             defaultValue: 12,
             max: 50,
             min: 1,
             step: 1,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the expected annual return rate on your mutual fund investment.',
           },
           {
             id: 3,
@@ -38,17 +46,25 @@ export const cardDetailsObj: Array<CardProps> = [
             max: 60,
             min: 0.5,
             step: 0.5,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the total duration for which you will be investing in the mutual fund.',
           },
         ],
         LUMPSUM: [
           {
             id: 1,
             title: 'principal',
-            label: 'Total Investment (in Rupees)',
+            label: 'Total Investment',
             defaultValue: 100000,
             max: 1000000,
             step: 1000,
             min: 500,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              "This is the total lump sum amount you're considering investing in the mutual fund all at once in indian rupees.",
           },
           {
             id: 2,
@@ -58,6 +74,10 @@ export const cardDetailsObj: Array<CardProps> = [
             max: 50,
             step: 1,
             min: 1,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the expected annual return rate on your mutual fund investment.',
           },
           {
             id: 3,
@@ -67,6 +87,10 @@ export const cardDetailsObj: Array<CardProps> = [
             max: 60,
             step: 0.5,
             min: 0.5,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the total duration for which you will be investing in the mutual fund.',
           },
         ],
       },
@@ -173,6 +197,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 500,
             step: 500,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the fixed amount you receive as your salary before any allowances or deductions + Dearness Allowance(DA) paid by the employer.',
           },
           {
             id: 2,
@@ -183,6 +210,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 18,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This refers to your current age. It can also be used to consider your age when you began your employment.',
           },
           {
             id: 3,
@@ -193,6 +223,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 30,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the age at which you plan to retire from your employment.',
           },
           {
             id: 3,
@@ -203,6 +236,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 12,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This indicates the percentage of your basic salary you contribute monthly to your EPF account. By law, the minimum contribution is 12% of your basic salary and dearness allowance (DA) combined.',
           },
           {
             id: 3,
@@ -213,6 +249,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 1,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the percentage by which your monthly basic salary increases annually.',
           },
           {
             id: 3,
@@ -223,6 +262,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 8.25,
             step: 1,
             isDisabled: true,
+            isTooltip: true,
+            tooltipText:
+              'The interest rate for FY 2023-2024 is set by the government and applied to your EPF balance to calculate your annual earnings.',
           },
         ],
         PPF: [
@@ -235,6 +277,9 @@ export const cardDetailsObj: Array<CardProps> = [
             step: 1000,
             min: 1000,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the fixed amount you plan to invest in your PPF account annually.',
           },
           {
             id: 2,
@@ -245,6 +290,9 @@ export const cardDetailsObj: Array<CardProps> = [
             step: 1,
             min: 15,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the total duration for which you will be investing in the PPF account.',
           },
           {
             id: 3,
@@ -255,6 +303,9 @@ export const cardDetailsObj: Array<CardProps> = [
             step: 0.5,
             min: 7.1,
             isDisabled: true,
+            isTooltip: true,
+            tooltipText:
+              'The interest rate for FY 2023-2024 is set by the government and applied to your PPF balance to calculate your annual earnings.',
           },
         ],
         GPF: [
@@ -267,6 +318,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 500,
             step: 1000,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the fixed amount you receive as your salary before any allowances or deductions + Dearness Allowance(DA) paid by the Govt.',
           },
           {
             id: 2,
@@ -277,6 +331,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 18,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This refers to your current age. It can also be used to consider your age when you began your employment.',
           },
           {
             id: 3,
@@ -287,16 +344,22 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 30,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This indicates your desired retirement age. The current government-mandated retirement age is 60 years, but you can choose to retire earlier.',
           },
           {
             id: 3,
             title: 'contributionPercentage',
             label: 'Contribution Percentage',
             defaultValue: 6,
-            max: 50,
+            max: 100,
             min: 6,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This indicates the percentage of your basic salary you contribute monthly to your GPF account. By law, the minimum contribution is 6% of your basic salary and dearness allowance (DA) combined.But you can increase it to 100% of your basic salary.',
           },
           {
             id: 3,
@@ -307,6 +370,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 1,
             step: 1,
             isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This is the percentage by which your monthly basic salary increases annually.',
           },
           {
             id: 3,
@@ -317,6 +383,9 @@ export const cardDetailsObj: Array<CardProps> = [
             min: 7.1,
             step: 1,
             isDisabled: true,
+            isTooltip: true,
+            tooltipText:
+              'The interest rate for FY 2023-2024 is set by the government and applied to your GPF balance to calculate your annual earnings.',
           },
         ],
       },
