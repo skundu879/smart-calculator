@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '@/lib/store';
+import { RootState } from '../../store';
 import { dynamicMathCalculation } from '@/utils/dynamicMathCalculation';
 
 type ProvidentFund = {

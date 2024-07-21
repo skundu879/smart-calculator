@@ -1,7 +1,6 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../../store';
 import { dynamicMathCalculation } from '@/utils/dynamicMathCalculation';
-import { result } from 'lodash';
 
 type MutualFund = {
   data: {
