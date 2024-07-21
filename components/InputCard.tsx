@@ -38,7 +38,6 @@ const InputCard: React.FC<InputCardProps> = ({
   activeTab,
   formData,
 }): ReactElement => {
-  console.log('formData', formData, activeTab);
   const getTabList = (tab: string, key: number) => (
     <TabsTrigger
       value={tab}

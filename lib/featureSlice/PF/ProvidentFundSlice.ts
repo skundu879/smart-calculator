@@ -58,7 +58,6 @@ const ProvidentFundSlice = createSlice({
         formula[activeTab].params,
         formula[activeTab].formula
       );
-      console.log(dynamicFunctionCall);
       let result = dynamicFunctionCall(...Object.values(data))(
         ...Object.values(data)
       );

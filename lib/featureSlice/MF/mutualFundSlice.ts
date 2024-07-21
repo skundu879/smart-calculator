@@ -86,7 +86,6 @@ const MutualFundSlice = createSlice({
             ...dataSet
           );
         }
-        // calculatedData[activeTab][element.lebel] = dynamicFunction(...dataSet);
       });
     },
   },
