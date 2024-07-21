@@ -69,19 +69,21 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
   };
 
   return (
-    <Card className='sm:w-[420px] w-full'>
-      <CardHeader>
-        <CardTitle>Estimated Return</CardTitle>
-        <CardDescription>Review Your Estimated Payout</CardDescription>
-      </CardHeader>
-      <CardContent>
-        {resultDetails.map((ele: any) => {
-          return resultContent(ele.title, ele.lebel, ele.color);
-        })}
-      </CardContent>
-      <CardFooter className='mt-8'>
-        <StackedBar graphData={getGrpahData(resultDetails, calculatedData)} />
-      </CardFooter>
+    <Card className='sm:w-[420px] w-full flex flex-col justify-between '>
+      <div>
+        <CardHeader>
+          <CardTitle>Estimated Return</CardTitle>
+          <CardDescription>Review Your Estimated Payout</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {resultDetails.map((ele: any) => {
+            return resultContent(ele.title, ele.lebel, ele.color);
+          })}
+        </CardContent>
+        <CardFooter className='mt-8'>
+          <StackedBar graphData={getGrpahData(resultDetails, calculatedData)} />
+        </CardFooter>
+      </div>
       <Disclaimer />
     </Card>
   );

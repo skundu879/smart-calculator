@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className='bg-gray-800 text-white m-0 py-4 w-full'>
+    <footer className='bg-slate-800 text-white m-0 py-4 w-full'>
       <div className='sm:container px-2 flex justify-between'>
         <div>
           <p className='text-sm font-semibold'>&copy; 2024 QuickCal.</p>

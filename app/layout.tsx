@@ -20,11 +20,15 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <main className='flex flex-col justify-center items-center'>
+        <main>
           <StoreProvider>
-            <Navbar />
-            <div className='sm:container mt-24'>{children}</div>
-            <Footer />
+            <div className='flex flex-col items-center min-h-svh justify-between'>
+              <Navbar />
+              <div className='sm:container mt-24 justify-start'>{children}</div>
+              <div className='w-full justify-end'>
+                <Footer />
+              </div>
+            </div>
           </StoreProvider>
         </main>
       </body>

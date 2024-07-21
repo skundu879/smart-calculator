@@ -6,9 +6,11 @@ const FeaturesLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <main className='flex flex-col gap-6 p-4 min-h-screen'>
-      <CustomBreadcrumb />
-      <div>{children}</div>
+    <main className=' p-4'>
+      <div className='flex flex-col gap-6'>
+        <CustomBreadcrumb />
+        <div>{children}</div>
+      </div>
     </main>
   );
 };

@@ -19,19 +19,21 @@ const CalcCard = ({
 }: CardProps) => {
   return (
     <div>
-      <Card className={cn('h-[310px]')}>
-        <CardHeader>
-          <CardTitle>{cardTitle}</CardTitle>
-          <CardDescription>{cardDescription}</CardDescription>
-        </CardHeader>
-        <CardContent>{cardContent}</CardContent>
-        <CardFooter className='flex justify-end pr-0'>
+      <Card className='min-h-[11rem] sm:h-[20rem] flex flex-col justify-between bg-gradient-to-b from-sky-100 to-orange-50 shadow'>
+        <div>
+          <CardHeader>
+            <CardTitle>{cardTitle}</CardTitle>
+            <CardDescription>{cardDescription}</CardDescription>
+          </CardHeader>
+          <CardContent className='sm:block hidden'>{cardContent}</CardContent>
+        </div>
+        <CardFooter className='flex flex-row justify-end pr-0 pb-0'>
           <Image
             src={`/svg/${cardIcon}`}
             alt='SIPIcon'
             width={28}
             height={24}
-            className='w-28 sm:w-36 h-20 mb-0'
+            className='w-20 sm:w-36 mb-0 '
           />
         </CardFooter>
       </Card>
