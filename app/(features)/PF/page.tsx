@@ -12,7 +12,7 @@ import {
   formDataSelector,
   calculateMutualFund,
   calculatedDataByTabSelector,
-} from '@/lib/featureSlice/PF/providentFundSlice';
+} from '../../../lib/featureSlice/PF/providentFundSlice';
 
 const cardTitle = 'Provident Fund Calculator';
 const cardDescription =

@@ -61,7 +61,6 @@ const ProvidentFundSlice = createSlice({
       let result = dynamicFunctionCall(...Object.values(data))(
         ...Object.values(data)
       );
-      console.log('result', result);
       resultFormuala[activeTab].forEach((element: any) => {
         calculatedData[activeTab][element.lebel] = result[element.lebel];
       });
