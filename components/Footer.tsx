@@ -9,6 +9,7 @@ const Footer = () => {
           <div className='mt-2 flex flex-row sm:gap-2 gap-0 '>
             <a
               href='https://www.facebook.com/sujan.kundu.879'
+              target='_blank'
               className='text-gray-400 hover:text-white mx-2'
             >
               <svg
@@ -23,6 +24,7 @@ const Footer = () => {
 
             <a
               href='https://github.com/skundu879?tab=repositories'
+              target='_blank'
               className='text-gray-400 hover:text-white mx-2'
             >
               <svg
@@ -36,6 +38,7 @@ const Footer = () => {
             </a>
             <a
               href='https://www.instagram.com/skundu879/'
+              target='_blank'
               className='text-gray-400 hover:text-white mx-2'
             >
               <svg
@@ -49,6 +52,7 @@ const Footer = () => {
             </a>
             <a
               href='https://www.linkedin.com/in/sujan-kundu-360222125/'
+              target='_blank'
               className='text-gray-400 hover:text-white mx-2'
             >
               <svg

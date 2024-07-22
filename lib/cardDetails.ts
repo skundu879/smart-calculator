@@ -24,6 +24,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This refers to the specific amount you contribute towards your SIP each month in indian rupees.',
+            inputType: 'slider',
           },
           {
             id: 2,
@@ -37,6 +38,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the expected annual return rate on your mutual fund investment.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -50,6 +52,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the total duration for which you will be investing in the mutual fund.',
+            inputType: 'slider',
           },
         ],
         LUMPSUM: [
@@ -65,6 +68,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               "This is the total lump sum amount you're considering investing in the mutual fund all at once in indian rupees.",
+            inputType: 'slider',
           },
           {
             id: 2,
@@ -78,6 +82,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the expected annual return rate on your mutual fund investment.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -91,6 +96,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the total duration for which you will be investing in the mutual fund.',
+            inputType: 'slider',
           },
         ],
       },
@@ -200,6 +206,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the fixed amount you receive as your salary before any allowances or deductions + Dearness Allowance(DA) paid by the employer.',
+            inputType: 'slider',
           },
           {
             id: 2,
@@ -213,6 +220,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This refers to your current age. It can also be used to consider your age when you began your employment.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -226,6 +234,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the age at which you plan to retire from your employment.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -239,6 +248,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This indicates the percentage of your basic salary you contribute monthly to your EPF account. By law, the minimum contribution is 12% of your basic salary and dearness allowance (DA) combined.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -252,6 +262,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the percentage by which your monthly basic salary increases annually.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -265,6 +276,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'The interest rate for FY 2023-2024 is set by the government and applied to your EPF balance to calculate your annual earnings.',
+            inputType: 'inputNumber',
           },
         ],
         PPF: [
@@ -280,6 +292,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the fixed amount you plan to invest in your PPF account annually.',
+            inputType: 'slider',
           },
           {
             id: 2,
@@ -293,6 +306,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the total duration for which you will be investing in the PPF account.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -306,6 +320,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'The interest rate for FY 2023-2024 is set by the government and applied to your PPF balance to calculate your annual earnings.',
+            inputType: 'inputNumber',
           },
         ],
         GPF: [
@@ -321,6 +336,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the fixed amount you receive as your salary before any allowances or deductions + Dearness Allowance(DA) paid by the Govt.',
+            inputType: 'slider',
           },
           {
             id: 2,
@@ -334,6 +350,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This refers to your current age. It can also be used to consider your age when you began your employment.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -347,6 +364,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This indicates your desired retirement age. The current government-mandated retirement age is 60 years, but you can choose to retire earlier.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -360,6 +378,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This indicates the percentage of your basic salary you contribute monthly to your GPF account. By law, the minimum contribution is 6% of your basic salary and dearness allowance (DA) combined.But you can increase it to 100% of your basic salary.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -373,6 +392,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'This is the percentage by which your monthly basic salary increases annually.',
+            inputType: 'slider',
           },
           {
             id: 3,
@@ -386,6 +406,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isTooltip: true,
             tooltipText:
               'The interest rate for FY 2023-2024 is set by the government and applied to your GPF balance to calculate your annual earnings.',
+            inputType: 'inputNumber',
           },
         ],
       },
@@ -496,6 +517,163 @@ export const cardDetailsObj: Array<CardProps> = [
             lebel: 'totalAmount',
             color: '',
             formula: 'maturityAmount',
+            isGraph: false,
+          },
+        ],
+      },
+    },
+  },
+  {
+    cardTitle: 'SC',
+    cardDescription: 'Salary Calculator',
+    cardContent:
+      'Find out your estimated take-home salary after considering deductions from your CTC.',
+    cardIcon: 'undraw_success_factors_salary.svg',
+    cardUrl: '/SC',
+    calculationDetails: {
+      tabsList: ['SC'],
+      inputFields: {
+        SC: [
+          {
+            id: 1,
+            title: 'ctc',
+            label: 'Cost to Company (CTC)',
+            defaultValue: 600000,
+            max: 9000000,
+            min: 100000,
+            step: 50000,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'This refers to the total amount a company spends on an employee in a year. This includes not only the base salary but also various benefits and employer contributions.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 2,
+            title: 'bonus',
+            label: 'Bonus Amount (yearly)',
+            defaultValue: 50000,
+            max: 1000000,
+            min: 0,
+            step: 10000,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'The amount mentioned in your CTC as a performance bonus is paid annually.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 3,
+            title: 'monthlyProfessionalTax',
+            label: 'Monthly Professional Tax',
+            defaultValue: 200,
+            max: 5000,
+            min: 0,
+            step: 50,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'A small, state-imposed tax deducted monthly from the income of professionals.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 4,
+            title: 'monthlyEmployerPF',
+            label: 'Monthly Employer PF ',
+            defaultValue: 1800,
+            max: 50000,
+            min: 1200,
+            step: 100,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'The amount contribution your employer makes towards your Provident Fund (PF) account.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 5,
+            title: 'monthlyEmployeePF',
+            label: 'Monthly Employee PF',
+            defaultValue: 1800,
+            max: 50000,
+            min: 1200,
+            step: 100,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'Your monthly employee contribution to the Provident Fund (PF).',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 6,
+            title: 'additionalDeduction',
+            label: 'Additional Deduction (Optional)',
+            defaultValue: 0,
+            max: 20000,
+            min: 0,
+            step: 100,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'Any additional monthly deductions you may have, such as health insurance premiums or a car loan EMI.',
+            inputType: 'inputNumber',
+          },
+        ],
+      },
+      formulas: {
+        SC: {
+          params: [
+            'ctc',
+            'bonus',
+            'monthlyProfessionalTax',
+            'monthlyEmployerPF',
+            'monthlyEmployeePF',
+            'additionalDeduction',
+          ],
+          formula:
+            'function calculateTakeHomeSalary(ctc, bonus, monthlyProfessionalTax, monthlyEmployerPF, monthlyEmployeePF, additionalDeduction) {   const monthlyBonus = bonus / 12;   const annualGrossSalary = ctc - bonus;   const monthlyGrossSalary = annualGrossSalary / 12;   const MonthlyDeductions = monthlyProfessionalTax + monthlyEmployeePF + monthlyEmployerPF + additionalDeduction + monthlyBonus;   const monthlytakeHomeSalary = ctc / 12 - MonthlyDeductions;   const yearlyTakeHomeSalary = monthlytakeHomeSalary * 12;   const yearlyDeductions = MonthlyDeductions * 12;   return {monthlytakeHomeSalary, yearlyTakeHomeSalary, MonthlyDeductions, yearlyDeductions, totalAmount: monthlyGrossSalary }; }',
+        },
+      },
+      results: {
+        SC: [
+          {
+            params: ['monthlyGrossSalary'],
+            title: 'Monthly Gross Salary',
+            lebel: 'totalAmount',
+            color: '',
+            formula: 'monthlyGrossSalary',
+            isGraph: false,
+          },
+          {
+            params: ['MonthlyDeductions'],
+            title: 'Total Monthly Deductions',
+            lebel: 'MonthlyDeductions',
+            color: 'warning',
+            formula: 'MonthlyDeductions',
+            isGraph: true,
+          },
+          {
+            params: ['monthlytakeHomeSalary'],
+            title: 'Monthly Take Home Salary',
+            lebel: 'monthlytakeHomeSalary',
+            color: 'good',
+            formula: 'monthlytakeHomeSalary',
+            isGraph: true,
+          },
+          {
+            params: ['yearlyDeductions'],
+            title: 'Total Yearly Deductions',
+            lebel: 'yearlyDeductions',
+            color: '',
+            formula: 'yearlyDeductions',
+            isGraph: false,
+          },
+          {
+            params: ['yearlyTakeHomeSalary'],
+            title: 'Yearly Take Home Salary',
+            lebel: 'yearlyTakeHomeSalary',
+            color: '',
+            formula: 'yearlyTakeHomeSalary',
             isGraph: false,
           },
         ],

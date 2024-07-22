@@ -37,6 +37,7 @@ type ResultCardProps = {
 };
 
 const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
+  console.log('resultDetails', calculatedData);
   const resultContent = (title: string, lebel: string, color?: string) => {
     return (
       <div className='flex flex-row justify-between items-center mt-6'>

@@ -18,6 +18,7 @@ export type CardProps = {
         isDisabled?: boolean;
         isTooltip?: boolean;
         tooltipText?: string;
+        inputType: string;
       }>;
     };
     formulas: {

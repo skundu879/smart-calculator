@@ -1,6 +1,7 @@
 'use client';
-import React, { ReactElement, useEffect } from 'react';
+import React, { createElement, ReactElement, useEffect } from 'react';
 import InputSlider from '@/components/InputSlider';
+import InputNumber from '@/components/InputNumber';
 import {
   Card,
   CardContent,
@@ -27,6 +28,11 @@ interface InputCardProps {
   activeTab: any;
   formData: any;
 }
+
+const inputFieldsTypeMap: Record<string, React.FC<any>> = {
+  slider: InputSlider,
+  inputNumber: InputNumber,
+};
 
 const InputCard: React.FC<InputCardProps> = ({
   cardObject,
@@ -56,22 +62,22 @@ const InputCard: React.FC<InputCardProps> = ({
     isDisabled,
     isTooltip,
     tooltipText,
+    handleChange,
+    inputType,
   }: any) => {
-    return (
-      <InputSlider
-        defaultValue={defaultValue}
-        label={label}
-        max={max}
-        min={min}
-        step={step}
-        handleChange={(ele) => handleChange(ele, title)}
-        key={title}
-        value={formData[title]}
-        isDisabled={isDisabled}
-        isTooltip={isTooltip}
-        tooltipText={tooltipText}
-      />
-    );
+    return React.createElement(inputFieldsTypeMap[inputType], {
+      defaultValue: defaultValue,
+      label: label,
+      max: max,
+      min: min,
+      step: step,
+      handleChange: (ele: any) => handleChange(ele, title),
+      key: title,
+      value: formData[title],
+      isDisabled: isDisabled,
+      isTooltip: isTooltip,
+      tooltipText: tooltipText,
+    });
   };
   const onTabValueChange = (tab: string) => {
     setActivetab(tab);
@@ -112,7 +118,7 @@ const InputCard: React.FC<InputCardProps> = ({
           >
             {!isEmpty(formData) &&
               cardObject.inputFields[activeTab].map((field: any) => {
-                return getTabContent(field);
+                return getTabContent({ ...field, handleChange });
               })}
           </TabsContent>
         </Tabs>

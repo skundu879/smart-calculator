@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import MutualFundSlice from '@/lib/featureSlice/MF/mutualFundSlice';
 import providentFundSlice from '@/lib/featureSlice/PF/providentFundSlice';
+import SalaryCalculatorSlice from '@/lib/featureSlice/SC/salaryCalculatorSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       mutualFund: MutualFundSlice,
       providentFund: providentFundSlice,
+      salaryCalculator: SalaryCalculatorSlice,
     },
   });
 };
