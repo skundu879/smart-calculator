@@ -1,3 +1,5 @@
+import { ColumnDef } from '@tanstack/react-table';
+
 export type CardProps = {
   cardTitle: string;
   cardDescription: string;
@@ -18,7 +20,7 @@ export type CardProps = {
         isDisabled?: boolean;
         isTooltip?: boolean;
         tooltipText?: string;
-        inputType: string;
+        inputType: 'slider' | 'inputNumber';
       }>;
     };
     formulas: {
@@ -28,14 +30,18 @@ export type CardProps = {
       };
     };
     results: {
-      [key: string]: Array<{
-        params: Array<string>;
-        formula: string;
-        title: string;
-        lebel: string;
-        color: string;
-        isGraph: boolean;
-      }>;
+      [key: string]: {
+        displayList: Array<{
+          params: Array<string>;
+          formula: string;
+          title: string;
+          lebel: string;
+          color: 'good' | 'bad' | 'warning' | '';
+          isGraph: boolean;
+          isTable?: boolean;
+        }>;
+        columns?: ColumnDef<object>[];
+      };
     };
   };
 };

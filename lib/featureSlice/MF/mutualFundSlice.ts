@@ -56,13 +56,12 @@ const MutualFundSlice = createSlice({
       const calculatedData = state.calculatedData;
       const data = state.data[activeTab];
       const { formula, resultFormuala } = action.payload;
-
       const dynamicFunctionCall = dynamicMathCalculation(
         formula[activeTab].params,
         formula[activeTab].formula
       );
       let result = dynamicFunctionCall(...Object.values(data));
-      resultFormuala[activeTab].forEach((element: any) => {
+      resultFormuala[activeTab].displayList.forEach((element: any) => {
         const dynamicFunction = dynamicMathCalculation(
           element.params,
           element.formula

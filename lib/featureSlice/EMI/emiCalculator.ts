@@ -2,7 +2,7 @@ import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { dynamicMathCalculation } from '@/utils/dynamicMathCalculation';
 
-type ProvidentFund = {
+type EMICalcultor = {
   data: {
     [key: string]: any;
   };
@@ -15,26 +15,22 @@ type ProvidentFund = {
   activeTab: string;
   error: string | null;
 };
-const initialState: ProvidentFund = {
+const initialState: EMICalcultor = {
   data: {
-    EPF: {},
-    PPF: {},
-    GPF: {},
+    EMI: {},
   },
   result: 0,
   calculatedData: {
-    EPF: {},
-    PPF: {},
-    GPF: {},
+    EMI: {},
   },
   isTaxable: false,
   isLoading: false,
-  activeTab: 'EPF',
+  activeTab: 'EMI',
   error: null,
 };
 
-const ProvidentFundSlice = createSlice({
-  name: 'providentFund',
+const EMICalculatorSlice = createSlice({
+  name: 'emiCalculatorSlice',
   initialState,
   reducers: {
     setActivetab: (state, action) => {
@@ -48,12 +44,11 @@ const ProvidentFundSlice = createSlice({
       const { title, value } = action.payload;
       state.data[activeTab][title] = value;
     },
-    calculateMutualFund: (state, action) => {
+    calculateMonthlyEMI: (state, action) => {
       const activeTab = state.activeTab;
       const calculatedData = state.calculatedData;
       const data = state.data[activeTab];
       const { formula, resultFormuala } = action.payload;
-
       const dynamicFunctionCall = dynamicMathCalculation(
         formula[activeTab].params,
         formula[activeTab].formula
@@ -68,29 +63,29 @@ const ProvidentFundSlice = createSlice({
   },
 });
 
-export const { setActivetab, setIsLoading, setFormDatas, calculateMutualFund } =
-  ProvidentFundSlice.actions;
-export default ProvidentFundSlice.reducer;
+export const { setActivetab, setIsLoading, setFormDatas, calculateMonthlyEMI } =
+  EMICalculatorSlice.actions;
+export default EMICalculatorSlice.reducer;
 
 export const activeTabSelector = createSelector(
-  (state: RootState) => state.providentFund.activeTab,
+  (state: RootState) => state.emiCalculator.activeTab,
   (activeTab) => activeTab
 );
 export const isTaxableSelector = createSelector(
-  (state: RootState) => state.providentFund.isTaxable,
+  (state: RootState) => state.emiCalculator.isTaxable,
   (isTaxable) => isTaxable
 );
 export const isLoadingSelector = createSelector(
-  (state: RootState) => state.providentFund.isLoading,
+  (state: RootState) => state.emiCalculator.isLoading,
   (isLoading) => isLoading
 );
 export const formDataSelector = createSelector(
-  (state: RootState) => state.providentFund.data,
-  (state: RootState) => state.providentFund.activeTab,
+  (state: RootState) => state.emiCalculator.data,
+  (state: RootState) => state.emiCalculator.activeTab,
   (data, activeTab) => data[activeTab]
 );
 export const calculatedDataByTabSelector = createSelector(
-  (state: RootState) => state.providentFund.calculatedData,
-  (state: RootState) => state.providentFund.activeTab,
+  (state: RootState) => state.emiCalculator.calculatedData,
+  (state: RootState) => state.emiCalculator.activeTab,
   (calculatedData, activeTab) => calculatedData[activeTab]
 );

@@ -57,7 +57,7 @@ const SalaryCalcultorSlice = createSlice({
       let result = dynamicFunctionCall(...Object.values(data))(
         ...Object.values(data)
       );
-      resultFormuala[activeTab].forEach((element: any) => {
+      resultFormuala[activeTab].displayList.forEach((element: any) => {
         calculatedData[activeTab][element.lebel] = result[element.lebel];
       });
     },

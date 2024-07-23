@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import MutualFundSlice from '@/lib/featureSlice/MF/mutualFundSlice';
 import providentFundSlice from '@/lib/featureSlice/PF/providentFundSlice';
 import SalaryCalculatorSlice from '@/lib/featureSlice/SC/salaryCalculatorSlice';
+import EMICalculatorSlice from '@/lib/featureSlice/EMI/emiCalculator';
 
 export const makeStore = () => {
   return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
       mutualFund: MutualFundSlice,
       providentFund: providentFundSlice,
       salaryCalculator: SalaryCalculatorSlice,
+      emiCalculator: EMICalculatorSlice,
     },
   });
 };

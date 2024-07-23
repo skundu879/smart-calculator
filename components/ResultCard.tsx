@@ -12,6 +12,8 @@ import StackedBar from './StackBar';
 import { cn } from '@/lib/utils';
 import { abbreviateNumber } from '@/utils/abbreviateNumber';
 import Disclaimer from './Disclaimer';
+import TableDialog from './TableDialog';
+import DataGrid from './DataGrid';
 
 const Colors: Record<string, string> = {
   warning: 'bg-yellow-300',
@@ -29,25 +31,54 @@ type ResultDetailItem = {
   title: string;
   color?: string;
   lebel?: string;
+  isTable?: boolean;
 };
 
 type ResultCardProps = {
-  resultDetails: ResultDetailItem[];
+  resultDetails: {
+    displayList: ResultDetailItem[];
+    columns?: Array<object>;
+  };
   calculatedData: Record<string, number>;
 };
 
 const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
-  console.log('resultDetails', calculatedData);
-  const resultContent = (title: string, lebel: string, color?: string) => {
+  const resultContent = (
+    title: string,
+    label: string,
+    color?: string,
+    isTable?: boolean
+  ) => {
     return (
-      <div className='flex flex-row justify-between items-center mt-6'>
-        <Label className='flex flex-row items-center'>
-          {title}
-          {color && (
-            <div className={cn(Colors[color], ' ml-2 h-2 w-8 rounded-md')} />
-          )}
-        </Label>
-        <Label>{abbreviateNumber(calculatedData[lebel])}</Label>
+      <div>
+        {isTable ? (
+          <div className=' flex mt-10 justify-center text-center w-auto'>
+            <TableDialog
+              label={title}
+              title={title}
+              description='How each EMI is divided between principal and interest repayment.'
+            >
+              <div className='flex flex-col'>
+                <DataGrid
+                  columns={resultDetails.columns || []}
+                  data={calculatedData[label]}
+                />
+              </div>
+            </TableDialog>
+          </div>
+        ) : (
+          <div className='flex flex-row justify-between items-center mt-6'>
+            <Label className='flex flex-row items-center'>
+              {title}
+              {color && (
+                <div
+                  className={cn(Colors[color], ' ml-2 h-2 w-8 rounded-md')}
+                />
+              )}
+            </Label>
+            <Label>{abbreviateNumber(calculatedData[label])}</Label>
+          </div>
+        )}
       </div>
     );
   };
@@ -77,12 +108,14 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
           <CardDescription>Review Your Estimated Payout</CardDescription>
         </CardHeader>
         <CardContent>
-          {resultDetails.map((ele: any) => {
-            return resultContent(ele.title, ele.lebel, ele.color);
+          {resultDetails.displayList.map((ele: any) => {
+            return resultContent(ele.title, ele.lebel, ele.color, ele.isTable);
           })}
         </CardContent>
         <CardFooter className='mt-8'>
-          <StackedBar graphData={getGrpahData(resultDetails, calculatedData)} />
+          <StackedBar
+            graphData={getGrpahData(resultDetails.displayList, calculatedData)}
+          />
         </CardFooter>
       </div>
       <Disclaimer />

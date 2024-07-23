@@ -5,12 +5,9 @@ const Disclaimer: React.FC = () => {
     <Alert className='mt-4'>
       <AlertTitle>Disclaimer**</AlertTitle>
       <AlertDescription className='font-normal text-xs md:text-sm'>
-        The Quick Calculator app is intended for informational and illustrative
-        purposes only. The calculations provided by this app are based on user
-        inputs and certain assumptions, and they should not be considered as
-        financial advice or recommendations. The actual returns on investments
-        may vary due to market fluctuations, changes in interest rates, taxes,
-        and other unforeseen factors.
+        The Quick Calculator app provides estimates only and should not be
+        relied upon as financial advice. Results are based on user input and
+        assumptions, and actual outcomes may differ.
       </AlertDescription>
     </Alert>
   );
