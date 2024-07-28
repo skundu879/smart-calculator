@@ -38,10 +38,7 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
     };
     return (
       <div className='flex flex-row justify-between items-center'>
-        <Label
-          htmlFor={`input-number-${label}`}
-          className='flex flex-row gap-2'
-        >
+        <Label htmlFor={`input-number-${label}`}>
           {label}
           {isTooltip && (
             <TooltipButton

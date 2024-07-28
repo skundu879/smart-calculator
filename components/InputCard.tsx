@@ -12,12 +12,22 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { isEmpty } from '@/utils/emptyValidation';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
 interface CardObjectTypes {
   tabsList: string[];
   inputFields: Record<string, any>[];
   formulas: Record<string, any>;
   results: Record<string, any>;
+  accordionList?: Array<{
+    id: number;
+    title: string;
+  }>;
 }
 
 interface InputCardProps {
@@ -34,7 +44,7 @@ interface InputCardProps {
 const inputFieldsTypeMap: Record<string, React.FC<any>> = {
   slider: InputSlider,
   inputNumber: InputNumber,
-  dropdown: () => <div>Dropdown</div>,
+  InputDropdown: InputDropdown,
 };
 
 const InputCard: React.FC<InputCardProps> = ({
@@ -67,11 +77,9 @@ const InputCard: React.FC<InputCardProps> = ({
     tooltipText,
     handleChange,
     inputType,
-    isAccordion,
-    accordionId,
     dropdownList,
   }: any) => {
-    return React.createElement(inputFieldsTypeMap[inputType], {
+    const inputField = React.createElement(inputFieldsTypeMap[inputType], {
       defaultValue: defaultValue,
       label: label,
       max: max,
@@ -83,8 +91,11 @@ const InputCard: React.FC<InputCardProps> = ({
       isDisabled: isDisabled,
       isTooltip: isTooltip,
       tooltipText: tooltipText,
+      dropdownList: dropdownList,
     });
+    return inputField;
   };
+
   const onTabValueChange = (tab: string) => {
     setActivetab(tab);
   };
@@ -123,9 +134,47 @@ const InputCard: React.FC<InputCardProps> = ({
             className='flex flex-col gap-8'
           >
             {!isEmpty(formData) &&
-              cardObject.inputFields[activeTab].map((field: any) => {
-                return getTabContent({ ...field, handleChange });
-              })}
+              cardObject.inputFields[activeTab].map(
+                (field: any, index: number) => {
+                  if (!field.isAccordion) {
+                    return getTabContent({
+                      ...field,
+                      handleChange,
+                    });
+                  }
+                }
+              )}
+
+            <Accordion
+              type='single'
+              collapsible
+              className='w-full'
+              // defaultValue='accordion-1'
+            >
+              {cardObject.accordionList &&
+                cardObject.accordionList.map((accordion: any) => (
+                  <AccordionItem
+                    key={accordion.id}
+                    value={`accordion-${accordion.id}`}
+                  >
+                    <AccordionTrigger>{accordion.title}</AccordionTrigger>
+                    <AccordionContent className='flex flex-col gap-8 sm:p-4 p-1'>
+                      {!isEmpty(formData) &&
+                        cardObject.inputFields[activeTab].map((field: any) => {
+                          if (
+                            field.isAccordion &&
+                            field.accordionId === accordion.id
+                          ) {
+                            return getTabContent({
+                              ...field,
+                              handleChange,
+                            });
+                          }
+                        })}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+            </Accordion>
           </TabsContent>
         </Tabs>
       </CardContent>

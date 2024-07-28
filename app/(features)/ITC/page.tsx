@@ -19,7 +19,6 @@ const cardDescription =
   'Easily estimate your income tax burden for any tax year by inputting your financial details and utilizing our advanced calculations.';
 
 const IncomeTaxCalculator = () => {
-  console.log('IncomeTaxCalculator');
   const router = usePathname();
   const pathSegments = router;
   const activeTab: any = useAppSelector((state) => activeTabSelector(state));
@@ -42,7 +41,7 @@ const IncomeTaxCalculator = () => {
     formula: any;
     resultFormuala: any;
   }) => {
-    dispatch(calculateMonthlyEMI({ formula, resultFormuala }));
+    // dispatch(calculateMonthlyEMI({ formula, resultFormuala }));
   };
 
   return (
