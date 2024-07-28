@@ -1,4 +1,5 @@
 import { CardProps } from '@/interface/cardProps';
+import { title } from 'process';
 
 export const cardDetailsObj: Array<CardProps> = [
   {
@@ -310,7 +311,7 @@ export const cardDetailsObj: Array<CardProps> = [
             isDisabled: false,
             isTooltip: true,
             tooltipText:
-              'This is the total duration for which you will be investing in the PPF account.',
+              'This is the total duration for which you will be investing in the PPF account. The minimum lock-in period for a PPF account is 15 years.',
             inputType: 'slider',
           },
           {
@@ -754,6 +755,332 @@ export const cardDetailsObj: Array<CardProps> = [
       },
       results: {
         EMI: {
+          displayList: [
+            {
+              params: ['monthlyEMI'],
+              title: 'Monthly EMI',
+              lebel: 'monthlyEMI',
+              color: '',
+              formula: 'monthlyEMI',
+              isGraph: false,
+              isTable: false,
+            },
+            {
+              params: ['principal'],
+              title: 'Principal Amount',
+              lebel: 'principal',
+              color: 'good',
+              formula: 'principal',
+              isGraph: true,
+              isTable: false,
+            },
+            {
+              params: ['totalInterestpayble'],
+              title: 'Interest Payable',
+              lebel: 'totalInterestpayble',
+              color: 'warning',
+              formula: 'totalInterestpayble',
+              isGraph: true,
+              isTable: false,
+            },
+            {
+              params: ['totalAmount'],
+              title: 'Total Payment',
+              lebel: 'totalAmount',
+              color: '',
+              formula: 'totalPayment',
+              isGraph: false,
+              isTable: false,
+            },
+            {
+              params: ['schedule'],
+              title: 'Monthly Scheule EMI Breakdown',
+              lebel: 'schedule',
+              color: '',
+              formula: 'schedule',
+              isGraph: false,
+              isTable: true,
+            },
+          ],
+          columns: [
+            {
+              accessorKey: 'month',
+              header: 'Mo.',
+            },
+            {
+              accessorKey: 'principalPayment',
+              header: 'Principal Payment',
+            },
+            {
+              accessorKey: 'interestPayment',
+              header: 'Interest Payment',
+            },
+            {
+              accessorKey: 'balance',
+              header: 'Balance',
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
+    cardTitle: 'Income Tax',
+    cardDescription: 'Income Tax Calculator',
+    cardContent: 'Easily Calculate Your Income Tax',
+    cardIcon: 'undraw_financial_data_ITC.svg',
+    cardUrl: '/ITC',
+    calculationDetails: {
+      tabsList: ['ITC'],
+      accordionList: [
+        {
+          id: 1,
+          title: 'Income Details',
+        },
+        {
+          id: 2,
+          title: 'Deductions',
+        },
+        {
+          id: 3,
+          title: 'HRA Exemption',
+        },
+      ],
+      inputFields: {
+        ITC: [
+          {
+            id: 1,
+            title: 'assessmentYear',
+            label: 'Assessment Year',
+            defaultValue: '2024-2025',
+            dropdownList: [
+              {
+                itemValue: '2024-2025',
+                itemLabel: '2024-2025',
+              },
+              {
+                itemValue: '2023-2024',
+                itemLabel: '2023-2024',
+              },
+              {
+                itemValue: '2022-2023',
+                itemLabel: '2022-2023',
+              },
+              {
+                itemValue: '2021-2022',
+                itemLabel: '2021-2022',
+              },
+            ],
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText:
+              'The financial year for which you are calculating tax.',
+            inputType: 'InputDropdown',
+          },
+          {
+            id: 2,
+            title: 'age',
+            label: 'Age (in Years)',
+            defaultValue: '30',
+            max: 100,
+            min: 18,
+            isDisabled: false,
+            isTooltip: true,
+            tooltipText: 'Your age as of 31st March of the assessment year.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 3,
+            accordionId: 1,
+            title: 'grossSalaryIncome',
+            label: 'Gross Salary Income',
+            defaultValue: 500000,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'The total anual income you receive from your employer before any deductions.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 4,
+            accordionId: 1,
+            title: 'anualRentalIncome',
+            label: 'Anual Rental Income',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'Any income you receive from renting out a property you own.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 5,
+            accordionId: 1,
+            title: 'capitalGains',
+            label: 'Capital Gains',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'Any profit you make from selling a capital asset, such as property or shares.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 6,
+            accordionId: 1,
+            title: 'businessIncome',
+            label: 'Business Income',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'Any income you receive from a business you own or operate.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 7,
+            accordionId: 1,
+            title: 'anualIncomeFromOtherSources',
+            label: 'Anual Income From Other Sources',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'any additional income you receive from sources other than your salary, such as interest on savings accounts or rental income.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 8,
+            accordionId: 2,
+            title: 'basicDeductions',
+            label: 'Basic Deductions (80C)',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'Investments in PPF(Public Provident Fund), NSC(National Savings Certificates), ELSS(Equity Linked Saving Schemes), LIC, etc., up to ₹1,50,000.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 9,
+            accordionId: 2,
+            title: 'healthInsurance',
+            label: 'Health Insurance Premiums (80D)',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'Premiums paid for health insurance policies for yourself, your spouse, children, and parents up to ₹25,000.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 10,
+            accordionId: 2,
+            title: 'educationLoan',
+            label: 'Education Loan Interest (80E)',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'Interest paid on education loans for yourself, your spouse, or children for an unlimited amount.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 11,
+            accordionId: 2,
+            title: 'donations',
+            label: 'Donations To Charity (80G)',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              "Donate to eligible charitable organizations and claim a 50% tax deduction. Contributions to specific funds like the National Defence Fund or Prime Minister's Relief Fund qualify for a 100% deduction.",
+            inputType: 'inputNumber',
+          },
+          {
+            id: 12,
+            accordionId: 3,
+            title: 'hra',
+            label: 'HRA Received',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'The amount of House Rent Allowance (HRA) you receive from your employer.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 13,
+            accordionId: 3,
+            title: 'rentPaid',
+            label: 'Rent Paid (Per Annum)',
+            defaultValue: 0,
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'The total amount of rent you pay annually for your accommodation.',
+            inputType: 'inputNumber',
+          },
+          {
+            id: 14,
+            accordionId: 3,
+            title: 'location',
+            label: 'Location of Residence',
+            dropdownList: [
+              {
+                itemValue: 'Metro',
+                itemLabel: 'Metro',
+              },
+              {
+                itemValue: 'Non-Metro',
+                itemLabel: 'Non-Metro',
+              },
+            ],
+            defaultValue: 'Metro',
+            isDisabled: false,
+            isTooltip: true,
+            isAccordion: true,
+            tooltipText:
+              'The city in which you reside. This determines the HRA exemption you are eligible for.',
+            inputType: 'InputDropdown',
+          },
+        ],
+      },
+      formulas: {
+        ITC: {
+          params: [
+            'assessmentYear',
+            'age',
+            'grossSalaryIncome',
+            'anualRentalIncome',
+            'capitalGains',
+            'businessIncome',
+            'anualIncomeFromOtherSources',
+            'basicDeductions',
+            'healthInsurance',
+            'educationLoan',
+            'donations',
+            'hra',
+            'rentPaid',
+            'location',
+          ],
+          formula:
+            'function generateAmortizationSchedule(loanAmount, rateOfInterest, loanTenure) {   const monthlyInterestRate = rateOfInterest / 12 / 100;   const numberOfMonths = loanTenure * 12;   const emi =     (loanAmount *       monthlyInterestRate *       Math.pow(1 + monthlyInterestRate, numberOfMonths)) /     (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);   let balance = loanAmount;   const schedule = [];   const totalInterest = emi * numberOfMonths - loanAmount;   for (let month = 1; month <= numberOfMonths; month++) {     const interestPayment = balance * monthlyInterestRate;     const principalPayment = emi - interestPayment;     balance -= principalPayment;     schedule.push({       month: month,       emi: emi.toFixed(),       principalPayment: principalPayment.toFixed(),       interestPayment: interestPayment.toFixed(),       balance: balance < 0 ? 0 : balance.toFixed(),     });   }   return {     monthlyEMI: emi,     totalInterestpayble: totalInterest,     totalAmount: loanAmount + totalInterest,     principal: loanAmount,     schedule,   }; };',
+        },
+      },
+      results: {
+        ITC: {
           displayList: [
             {
               params: ['monthlyEMI'],

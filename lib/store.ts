@@ -3,7 +3,7 @@ import MutualFundSlice from '@/lib/featureSlice/MF/mutualFundSlice';
 import providentFundSlice from '@/lib/featureSlice/PF/providentFundSlice';
 import SalaryCalculatorSlice from '@/lib/featureSlice/SC/salaryCalculatorSlice';
 import EMICalculatorSlice from '@/lib/featureSlice/EMI/emiCalculator';
-
+import IncomeTaxCalculatorSlice from '@/lib/featureSlice/ITC/incomeTaxCalculatorSlice';
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -11,6 +11,7 @@ export const makeStore = () => {
       providentFund: providentFundSlice,
       salaryCalculator: SalaryCalculatorSlice,
       emiCalculator: EMICalculatorSlice,
+      incomeTaxCalculator: IncomeTaxCalculatorSlice,
     },
   });
 };

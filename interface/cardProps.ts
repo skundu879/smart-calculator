@@ -8,19 +8,34 @@ export type CardProps = {
   cardUrl: string;
   calculationDetails: {
     tabsList: Array<string>;
+    accordionList?: Array<{
+      id: number;
+      title: string;
+    }>;
     inputFields: {
       [key: string]: Array<{
         id: number;
+        accordionId?: number;
         title: string;
         label: string;
-        defaultValue: number;
-        max: number;
-        min: number;
-        step: number;
+        defaultValue?: number | string;
+        dropdownList?: Array<{
+          itemValue: string;
+          itemLabel: string;
+        }>;
+        max?: number;
+        min?: number;
+        step?: number;
         isDisabled?: boolean;
         isTooltip?: boolean;
+        isAccordion?: boolean;
         tooltipText?: string;
-        inputType: 'slider' | 'inputNumber';
+        inputType:
+          | 'slider'
+          | 'inputNumber'
+          | 'InputDropdown'
+          | 'radio'
+          | 'checkbox';
       }>;
     };
     formulas: {

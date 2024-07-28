@@ -2,6 +2,7 @@
 import React, { createElement, ReactElement, useEffect } from 'react';
 import InputSlider from '@/components/InputSlider';
 import InputNumber from '@/components/InputNumber';
+import InputDropdown from '@/components/InputDropdown';
 import {
   Card,
   CardContent,
@@ -11,6 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { isEmpty } from '@/utils/emptyValidation';
+
 interface CardObjectTypes {
   tabsList: string[];
   inputFields: Record<string, any>[];
@@ -32,6 +34,7 @@ interface InputCardProps {
 const inputFieldsTypeMap: Record<string, React.FC<any>> = {
   slider: InputSlider,
   inputNumber: InputNumber,
+  dropdown: () => <div>Dropdown</div>,
 };
 
 const InputCard: React.FC<InputCardProps> = ({
@@ -64,6 +67,9 @@ const InputCard: React.FC<InputCardProps> = ({
     tooltipText,
     handleChange,
     inputType,
+    isAccordion,
+    accordionId,
+    dropdownList,
   }: any) => {
     return React.createElement(inputFieldsTypeMap[inputType], {
       defaultValue: defaultValue,
