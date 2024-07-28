@@ -36,7 +36,7 @@ const InputDropdown = ({
     <div className='flex flex-row justify-between items-center'>
       <Label
         htmlFor={`input-number-${label}`}
-        className='sm:text-sm text-xs'
+        className='sm:text-sm text-xs text-wrap mr-4'
       >
         {label}
         {isTooltip && (

@@ -49,7 +49,10 @@ const InputSlider: React.FC<InputSliderProps> = React.memo(
     return (
       <div className='flex flex-col gap-8'>
         <div className='flex flex-row justify-between items-center'>
-          <Label htmlFor={`input-slider-${label}`}>
+          <Label
+            htmlFor={`input-slider-${label}`}
+            className='text-wrap mr-4'
+          >
             {label}
             {isTooltip && (
               <TooltipButton

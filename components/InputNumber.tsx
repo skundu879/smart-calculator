@@ -37,8 +37,11 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
       handleChange(event.target.value);
     };
     return (
-      <div className='flex flex-row justify-between items-center'>
-        <Label htmlFor={`input-number-${label}`}>
+      <div className='flex flex-row justify-between items-center w-full'>
+        <Label
+          htmlFor={`input-number-${label}`}
+          className='text-wrap mr-4'
+        >
           {label}
           {isTooltip && (
             <TooltipButton
