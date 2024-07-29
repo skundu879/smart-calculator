@@ -35,7 +35,7 @@ const TooltipButton = ({
       {isTooltipVisible && (
         <div
           ref={tooltipRef}
-          className='absolute z-20 w-64 p-2 mb-2 -left-1/2 transform -translate-x-1/2 bottom-full text-slate-800 rounded-md border bg-popover px-3 py-1.5 text-sm text-popover-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2'
+          className='absolute z-20 sm:w-48 w-36 mb-2 -left-1/2 transform -translate-x-1/2 bottom-full text-slate-800 rounded-md border bg-popover px-1 py-1.5 sm:text-sm text-xs text-popover-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2'
         >
           {tooltipText}
         </div>
