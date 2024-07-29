@@ -44,7 +44,7 @@ const IncomeTaxCalculatorSlice = createSlice({
       const { title, value } = action.payload;
       state.data[activeTab][title] = value;
     },
-    calculateMonthlyEMI: (state, action) => {
+    calculateTax: (state, action) => {
       const activeTab = state.activeTab;
       const calculatedData = state.calculatedData;
       const data = state.data[activeTab];
@@ -56,6 +56,7 @@ const IncomeTaxCalculatorSlice = createSlice({
       let result = dynamicFunctionCall(...Object.values(data))(
         ...Object.values(data)
       );
+      console.log('result', result);
       resultFormuala[activeTab].displayList.forEach((element: any) => {
         calculatedData[activeTab][element.lebel] = result[element.lebel];
       });
@@ -63,7 +64,7 @@ const IncomeTaxCalculatorSlice = createSlice({
   },
 });
 
-export const { setActivetab, setIsLoading, setFormDatas, calculateMonthlyEMI } =
+export const { setActivetab, setIsLoading, setFormDatas, calculateTax } =
   IncomeTaxCalculatorSlice.actions;
 export default IncomeTaxCalculatorSlice.reducer;
 

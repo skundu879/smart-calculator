@@ -32,6 +32,7 @@ type ResultDetailItem = {
   color?: string;
   lebel?: string;
   isTable?: boolean;
+  isGraph?: boolean;
 };
 
 type ResultCardProps = {
@@ -113,9 +114,14 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
           })}
         </CardContent>
         <CardFooter className='mt-8'>
-          <StackedBar
-            graphData={getGrpahData(resultDetails.displayList, calculatedData)}
-          />
+          {resultDetails.displayList.some((ele) => ele.isGraph) && (
+            <StackedBar
+              graphData={getGrpahData(
+                resultDetails.displayList,
+                calculatedData
+              )}
+            />
+          )}
         </CardFooter>
       </div>
       <Disclaimer />

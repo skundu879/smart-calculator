@@ -100,7 +100,7 @@ const InputCard: React.FC<InputCardProps> = ({
     setActivetab(tab);
   };
   const handleChange = (ele: any, title: string) => {
-    setFormDatas({ title, value: ele });
+    setFormDatas({ title, value: Number(ele) });
   };
   useEffect(() => {
     cardObject.inputFields[activeTab].forEach((element: any) => {

@@ -10,7 +10,7 @@ import {
   setActivetab,
   setFormDatas,
   formDataSelector,
-  calculateMonthlyEMI,
+  calculateTax,
   calculatedDataByTabSelector,
 } from '@/lib/featureSlice/ITC/incomeTaxCalculatorSlice';
 
@@ -41,7 +41,7 @@ const IncomeTaxCalculator = () => {
     formula: any;
     resultFormuala: any;
   }) => {
-    // dispatch(calculateMonthlyEMI({ formula, resultFormuala }));
+    dispatch(calculateTax({ formula, resultFormuala }));
   };
 
   return (
@@ -60,10 +60,10 @@ const IncomeTaxCalculator = () => {
                 activeTab={activeTab}
                 formData={formData}
               />
-              {/* <ResultCard
+              <ResultCard
                 resultDetails={ele.calculationDetails.results[activeTab]}
                 calculatedData={calculatedData}
-              /> */}
+              />
             </React.Fragment>
           );
         }
