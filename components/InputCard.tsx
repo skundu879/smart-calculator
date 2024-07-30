@@ -99,7 +99,7 @@ const InputCard: React.FC<InputCardProps> = ({
   const onTabValueChange = (tab: string) => {
     setActivetab(tab);
   };
-  const handleChange = (ele: any, title: string) => {
+  const handleChange = (ele: number, title: string) => {
     setFormDatas({ title, value: Number(ele) });
   };
   useEffect(() => {

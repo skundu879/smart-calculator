@@ -1116,7 +1116,7 @@ export const cardDetailsObj: Array<CardProps> = [
             },
             {
               params: ['taxSaved'],
-              title: 'Tax Saved',
+              title: 'Tax Saved (Old - New)',
               lebel: 'taxSaved',
               color: '',
               formula: 'taxSaved',

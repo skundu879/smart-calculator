@@ -105,8 +105,8 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
     <Card className='sm:w-[420px] w-full flex flex-col justify-between '>
       <div>
         <CardHeader>
-          <CardTitle>Estimated Return</CardTitle>
-          <CardDescription>Review Your Estimated Payout</CardDescription>
+          <CardTitle>Estimated Result</CardTitle>
+          <CardDescription>Review Your Estimated Result</CardDescription>
         </CardHeader>
         <CardContent>
           {resultDetails.displayList.map((ele: any) => {

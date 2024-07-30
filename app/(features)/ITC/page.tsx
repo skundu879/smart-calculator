@@ -16,7 +16,7 @@ import {
 
 const cardTitle = 'Income Tax Calculator';
 const cardDescription =
-  'Easily estimate your income tax burden for any tax year by inputting your financial details and utilizing our advanced calculations.';
+  'Quickly estimate and compare your income tax under both regimes.';
 
 const IncomeTaxCalculator = () => {
   const router = usePathname();
