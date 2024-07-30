@@ -97,7 +97,7 @@ function calculateIncomeTax(
 
   let oldTaxableIncome = netIncomeAfterExemptions - deductions - 50000;
 
-  let newTaxableIncome = netIncomeAfterExemptions - 75000;
+  let newTaxableIncome = grossTotalIncome - 75000;
   let oldTax;
   let newTax;
   oldTax = calculateTaxOldRegime(oldTaxableIncome, age);
