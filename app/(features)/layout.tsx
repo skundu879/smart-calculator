@@ -7,7 +7,7 @@ const FeaturesLayout = ({
 }>) => {
   return (
     <main className='px-4 mt-4'>
-      <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-6 mb-6'>
         <CustomBreadcrumb />
         <div>{children}</div>
       </div>

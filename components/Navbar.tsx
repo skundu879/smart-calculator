@@ -14,34 +14,32 @@ const Navbar = () => {
 
   return (
     <header
-      className='fixed top-0  w-full z-50 bg-white shadow-sm container mx-auto   
+      className='fixed top-0  w-screen z-50 bg-white shadow-sm container mx-auto   
  px-6 py-2 flex justify-between items-center text-center'
     >
-      <div className='flex justify-between items-center text-center w-full'>
+      <Link
+        href='/'
+        className='text-2xl font-bold text-slate-950 flex flex-row items-center'
+        aria-label='QuickCalc Home'
+      >
+        <h2 className='text-3xl font-semibold tracking-tight p-2 w-full'>
+          QuickCalc
+        </h2>
+      </Link>
+      <nav className=' hidden md:flex flex-row gap-6 '>
         <Link
-          href='/'
-          className='text-2xl font-bold text-slate-950 flex flex-row items-center'
-          aria-label='QuickCalc Home'
+          href='/about'
+          className='text-slate-950'
         >
-          <h2 className='text-3xl font-semibold tracking-tight p-2 w-full'>
-            QuickCalc
-          </h2>
+          About
         </Link>
-        <nav className=' hidden md:flex flex-row gap-6 '>
-          <Link
-            href='/about'
-            className='text-slate-950'
-          >
-            About
-          </Link>
-          <Link
-            href='/contact'
-            className='text-slate-950'
-          >
-            Contact
-          </Link>
-        </nav>
-      </div>
+        <Link
+          href='/contact'
+          className='text-slate-950'
+        >
+          Contact
+        </Link>
+      </nav>
       <div className='md:hidden'>
         <button
           onClick={toggleMenu}
