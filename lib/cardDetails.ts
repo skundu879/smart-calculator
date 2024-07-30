@@ -854,7 +854,7 @@ export const cardDetailsObj: Array<CardProps> = [
             label: 'Age (in Years)',
             defaultValue: 30,
             max: 100,
-            min: 18,
+            min: 0,
             isDisabled: false,
             isTooltip: true,
             tooltipText: 'Your age as of 31st March of the assessment year.',
