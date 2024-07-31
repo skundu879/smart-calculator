@@ -33,12 +33,6 @@ const Navbar = () => {
         >
           About
         </Link>
-        <Link
-          href='/contact'
-          className='text-slate-950'
-        >
-          Contact
-        </Link>
       </nav>
       <div className='md:hidden'>
         <button
@@ -74,13 +68,6 @@ const Navbar = () => {
             onClick={closeMenu}
           >
             About
-          </Link>
-          <Link
-            href='/contact'
-            className='text-white hover:text-gray-400 text-2xl mb-4'
-            onClick={closeMenu}
-          >
-            Contact
           </Link>
         </div>
       )}
