@@ -51,11 +51,15 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
           description: err.errors[0].message,
           duration: 4000,
         });
+        handleChange(newValue);
       }
     };
     return (
       <div className='flex flex-row justify-between items-center w-full'>
-        <Label htmlFor={`input-number-${label}`} className='text-wrap mr-4'>
+        <Label
+          htmlFor={`input-number-${label}`}
+          className='text-wrap mr-4'
+        >
           {label}
           {isTooltip && (
             <TooltipButton
