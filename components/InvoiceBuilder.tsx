@@ -30,6 +30,8 @@ import {
   customerDetailsSelector,
   gstSelector,
   totalSelector,
+  invoiceDateSelector,
+  invoiceNumberSelector,
 } from '@/lib/featureSlice/Invoice/invoiceSlice';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -53,6 +55,12 @@ const InvoiceBuilder = () => {
   );
   const customerDetails = useAppSelector((state) =>
     customerDetailsSelector(state.invoice)
+  );
+  const invoiceDate = useAppSelector((state) =>
+    invoiceDateSelector(state.invoice)
+  );
+  const invoiceNumber = useAppSelector((state) =>
+    invoiceNumberSelector(state.invoice)
   );
   const gst = useAppSelector((state) => gstSelector(state.invoice));
   const allTotal = useAppSelector((state) => totalSelector(state.invoice));
@@ -114,11 +122,11 @@ const InvoiceBuilder = () => {
         <div className='mb-2 sm:text-2xl text-sm font-semibold flex flex-col gap-1'>
           <div className='flex gap-1'>
             <h2 className='font-bold'>Invoice Date:</h2>
-            <p className='text-gray-600'>2023-07-31</p>
+            <p className='text-gray-600'>{invoiceDate}</p>
           </div>
           <div className='flex gap-1'>
             <h2 className='font-bold'>Invoice No:</h2>
-            <p className='text-gray-600'>09765</p>
+            <p className='text-gray-600'>{invoiceNumber}</p>
           </div>
         </div>
 
@@ -189,7 +197,8 @@ const InvoiceBuilder = () => {
                   }
                 />
               </div>
-              <div className='flex justify-end'>
+              <div className='flex justify-end items-center gap-1'>
+                <span className='font-medium text-sm'>GST %:</span>
                 <Input
                   value={gst}
                   placeholder='GST %'
