@@ -77,7 +77,7 @@ const DataGrid = <TData, TValue>({
               </TableRow>
             ))
           ) : (
-            <TableRow>
+            <TableRow key={'not-found'}>
               <TableCell
                 colSpan={columns.length}
                 className='h-24 text-center'

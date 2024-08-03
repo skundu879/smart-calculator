@@ -38,10 +38,13 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
     const { toast } = useToast();
     const numberSchema = z
       .number()
-      .min(min || 0, `Value must be greater than or equal to ${min}`)
-      .max(max || 999999999999, `Value must be less than or equal to ${max}`);
+      .min(min || 0, `Value must be greater than or equal to ${min || 0}`)
+      .max(
+        max || 999999999999,
+        `Value must be less than or equal to ${max || 999999999999}`
+      );
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value;
+      const newValue = Number(event.target.value);
       try {
         numberSchema.parse(Number(newValue));
         handleChange(newValue);
@@ -51,11 +54,16 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
           description: err.errors[0].message,
           duration: 4000,
         });
+        handleChange(newValue);
       }
     };
+
     return (
       <div className='flex flex-row justify-between items-center w-full'>
-        <Label htmlFor={`input-number-${label}`} className='text-wrap mr-4'>
+        <Label
+          htmlFor={`input-number-${label}`}
+          className='text-wrap mr-4'
+        >
           {label}
           {isTooltip && (
             <TooltipButton

@@ -18,7 +18,7 @@ interface StackBarProps {
   graphData: GraphDataItem[];
 }
 
-const Rectangle = styled.div<{ percentage: number; color: string }>`
+const Rectangle = styled.div<{ percentage: any; color: string }>`
   height: 20px;
   width: ${(props) => props.percentage}%;
   background-color: ${(props) => props.color};
