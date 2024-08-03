@@ -4,6 +4,7 @@ import providentFundSlice from '@/lib/featureSlice/PF/providentFundSlice';
 import SalaryCalculatorSlice from '@/lib/featureSlice/SC/salaryCalculatorSlice';
 import EMICalculatorSlice from '@/lib/featureSlice/EMI/emiCalculator';
 import IncomeTaxCalculatorSlice from '@/lib/featureSlice/ITC/incomeTaxCalculatorSlice';
+import InvoiceSlice from '@/lib/featureSlice/Invoice/invoiceSlice';
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const makeStore = () => {
       salaryCalculator: SalaryCalculatorSlice,
       emiCalculator: EMICalculatorSlice,
       incomeTaxCalculator: IncomeTaxCalculatorSlice,
+      invoice: InvoiceSlice,
     },
   });
 };
