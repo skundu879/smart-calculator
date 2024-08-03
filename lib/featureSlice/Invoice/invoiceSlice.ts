@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { update } from 'lodash';
+import { format } from 'date-fns';
 
 type Invoice = {
   Items: [
@@ -9,7 +9,7 @@ type Invoice = {
   CustomerDetails: { name: string; address: string };
   GST?: number;
   invoiceDate: string;
-  invoiceNumber: string;
+  invoiceNumber: number;
   isCompanyDetailsSaved: boolean;
 };
 
@@ -19,8 +19,8 @@ const initialState: Invoice = {
   CustomerDetails: { name: '', address: '' },
   isCompanyDetailsSaved: true,
   GST: 0,
-  invoiceDate: '',
-  invoiceNumber: '',
+  invoiceDate: format(new Date(), 'yyyy-MM-dd'),
+  invoiceNumber: 1000,
 };
 
 const InvoiceSlice = createSlice({
