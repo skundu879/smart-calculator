@@ -47,19 +47,27 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
   const resultContent = (
     title: string,
     label: string,
+    key: number,
     color?: string,
     isTable?: boolean
   ) => {
     return (
-      <div>
+      <div key={key}>
         {isTable ? (
-          <div className=' flex mt-10 justify-center text-center w-auto'>
+          <div
+            className=' flex mt-10 justify-center text-center w-auto'
+            key={key}
+          >
             <TableDialog
               label={title}
               title={title}
               description='How each EMI is divided between principal and interest repayment.'
+              key={`${key}-table`}
             >
-              <div className='flex flex-col'>
+              <div
+                className='flex flex-col'
+                key={key}
+              >
                 <DataGrid
                   columns={resultDetails.columns || []}
                   data={calculatedData[label]}
@@ -68,16 +76,25 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
             </TableDialog>
           </div>
         ) : (
-          <div className='flex flex-row justify-between items-center mt-6'>
-            <Label className='flex flex-row items-center'>
+          <div
+            className='flex flex-row justify-between items-center mt-6'
+            key={`${key}-content`}
+          >
+            <Label
+              className='flex flex-row items-center'
+              key={`${key}-label`}
+            >
               {title}
               {color && (
                 <div
                   className={cn(Colors[color], ' ml-2 h-2 w-8 rounded-md')}
+                  key={`${key}-color`}
                 />
               )}
             </Label>
-            <Label>{abbreviateNumber(calculatedData[label])}</Label>
+            <Label key={`${key}-value`}>
+              {abbreviateNumber(calculatedData[label])}
+            </Label>
           </div>
         )}
       </div>
@@ -109,8 +126,14 @@ const ResultCard = ({ resultDetails, calculatedData }: ResultCardProps) => {
           <CardDescription>Review Your Estimated Result</CardDescription>
         </CardHeader>
         <CardContent>
-          {resultDetails.displayList.map((ele: any) => {
-            return resultContent(ele.title, ele.lebel, ele.color, ele.isTable);
+          {resultDetails.displayList.map((ele: any, key: number) => {
+            return resultContent(
+              ele.title,
+              ele.lebel,
+              key,
+              ele.color,
+              ele.isTable
+            );
           })}
         </CardContent>
         <CardFooter className='mt-8'>

@@ -1,6 +1,6 @@
 'use client';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
+import React from 'react';
+import { usePathname } from 'next/navigation';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -30,12 +30,12 @@ const CustomBreadcrumb = () => {
 
           const currentPath = pathSegments.slice(0, index + 1).join('/');
           return (
-            <>
-              <BreadcrumbSeparator />
+            <React.Fragment key={index}>
+              <BreadcrumbSeparator key={`separator-${index}`} />
               <BreadcrumbItem key={index}>
                 <BreadcrumbPage> {segment}</BreadcrumbPage>
               </BreadcrumbItem>
-            </>
+            </React.Fragment>
           );
         })}
       </BreadcrumbList>

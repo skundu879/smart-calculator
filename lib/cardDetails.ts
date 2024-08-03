@@ -552,7 +552,7 @@ export const cardDetailsObj: Array<CardProps> = [
             label: 'Cost to Company (CTC)',
             defaultValue: 600000,
             max: 9000000,
-            min: 100000,
+            min: 50000,
             step: 50000,
             isDisabled: false,
             isTooltip: true,
