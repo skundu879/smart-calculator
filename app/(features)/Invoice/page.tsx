@@ -1,7 +1,7 @@
 import React from 'react';
 import InvoiceBuilder from '@/components/InvoiceBuilder';
 
-export const Invoice = () => {
+const Invoice = () => {
   return <InvoiceBuilder />;
 };
 
