@@ -943,7 +943,7 @@ export const cardDetailsObj: Array<CardProps> = [
             id: 9,
             accordionId: 2,
             title: 'healthInsurance',
-            label: 'Anula Health Insurance Premiums (80D)',
+            label: 'Anual Health Insurance Premiums (80D)',
             defaultValue: 0,
             max: 25000,
             isDisabled: false,

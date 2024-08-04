@@ -59,7 +59,7 @@ const About = () => {
                 width={24}
                 height={24}
               />
-              <span className='text-gray-600'>+91 9800602941</span>
+              <span className='text-gray-600'>+91 9800692941</span>
             </div>
           </div>
         </div>
