@@ -194,7 +194,7 @@ const InvoiceBuilder = () => {
               <div className='flex flex-col gap-2'>
                 <Input
                   id='name'
-                  type='tel'
+                  type='text'
                   placeholder='Customer Name'
                   value={customerDetails.name}
                   className='h-8'
@@ -204,7 +204,7 @@ const InvoiceBuilder = () => {
                 />
                 <Input
                   id='phone'
-                  type='text'
+                  type='tel'
                   placeholder='Customer Phone'
                   value={customerDetails.phone}
                   className='h-8'
