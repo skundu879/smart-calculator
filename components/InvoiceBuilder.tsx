@@ -34,9 +34,11 @@ import {
   invoiceNumberSelector,
 } from '@/lib/featureSlice/Invoice/invoiceSlice';
 import { useToast } from '@/components/ui/use-toast';
+import InvoiceTemplate from './InvoiceTemplate';
 
 type Items = [
   {
+    id: number;
     item: string;
     quantity: number;
     price: number;
@@ -107,9 +109,10 @@ const InvoiceBuilder = () => {
       ? JSON.parse(localStorageValue)
       : null;
     if (parsedValue !== null) {
-      parsedValue.name && handleComapnyDetails('name', parsedValue.name);
-      parsedValue.address &&
-        handleComapnyDetails('address', parsedValue.address);
+      parsedValue.CName && handleComapnyDetails('CName', parsedValue.CName);
+      parsedValue.CAddress &&
+        handleComapnyDetails('CAddress', parsedValue.CAddress);
+      parsedValue.CPhone && handleComapnyDetails('CPhone', parsedValue.CPhone);
     }
   }, []);
 
@@ -130,7 +133,7 @@ const InvoiceBuilder = () => {
           </div>
         </div>
 
-        {/* <CustomButton onClick={handlePrint}>
+        <CustomButton onClick={handlePrint}>
           <Image
             src='/svg/print.svg'
             alt='Print'
@@ -138,12 +141,9 @@ const InvoiceBuilder = () => {
             height={16}
           />
           <span>Print</span>
-        </CustomButton> */}
+        </CustomButton>
       </div>
-      <div
-        ref={invoiceRef}
-        className='bg-white shadow-lg rounded-lg pb-6'
-      >
+      <div className='bg-white shadow-lg rounded-lg pb-6'>
         <div className='flex flex-row justify-between gap-2 mb-2'>
           <div>
             <h3 className='sm:text-2xl text-base font-semibold mb-2'>
@@ -153,17 +153,29 @@ const InvoiceBuilder = () => {
             <div className='flex flex-col gap-2'>
               <div className='flex flex-col gap-2'>
                 <Input
+                  type='text'
                   placeholder='Company Name'
-                  value={companyDetails.name}
+                  value={companyDetails.CName}
                   className='h-8'
-                  onChange={(e) => handleComapnyDetails('name', e.target.value)}
+                  onChange={(e) =>
+                    handleComapnyDetails('CName', e.target.value)
+                  }
+                />
+                <Input
+                  type='tel'
+                  placeholder='Phone Number'
+                  value={companyDetails.CPhone}
+                  className='h-8'
+                  onChange={(e) =>
+                    handleComapnyDetails('CPhone', e.target.value)
+                  }
                 />
                 <Textarea
                   placeholder='Company Address'
-                  value={companyDetails.address}
+                  value={companyDetails.CAddress}
                   className='min-h-14 py-1'
                   onChange={(e) =>
-                    handleComapnyDetails('address', e.target.value)
+                    handleComapnyDetails('CAddress', e.target.value)
                   }
                 />
               </div>
@@ -181,6 +193,8 @@ const InvoiceBuilder = () => {
             <div className='flex flex-col gap-2'>
               <div className='flex flex-col gap-2'>
                 <Input
+                  id='name'
+                  type='tel'
                   placeholder='Customer Name'
                   value={customerDetails.name}
                   className='h-8'
@@ -188,7 +202,18 @@ const InvoiceBuilder = () => {
                     handleCustomerDetails('name', e.target.value)
                   }
                 />
+                <Input
+                  id='phone'
+                  type='text'
+                  placeholder='Customer Phone'
+                  value={customerDetails.phone}
+                  className='h-8'
+                  onChange={(e) =>
+                    handleCustomerDetails('phone', e.target.value)
+                  }
+                />
                 <Textarea
+                  id='address'
                   placeholder='Customer Address'
                   value={customerDetails.address}
                   className='min-h-14 py-1'
@@ -200,9 +225,10 @@ const InvoiceBuilder = () => {
               <div className='flex justify-end items-center gap-1'>
                 <span className='font-medium text-sm'>GST %:</span>
                 <Input
+                  type='number'
                   value={gst}
                   placeholder='GST %'
-                  className='h-8 sm:w-full w-20'
+                  className='h-8 sm:w-24 w-20'
                   onChange={(e) => handleGST(parseFloat(e.target.value))}
                 />
               </div>
@@ -217,7 +243,7 @@ const InvoiceBuilder = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Item</TableHead>
-                <TableHead>Count</TableHead>
+                <TableHead>QTY</TableHead>
                 <TableHead>Price</TableHead>
                 <TableHead className='text-right'>Total</TableHead>
                 <TableHead className='p-0 text-right'>
@@ -331,6 +357,18 @@ const InvoiceBuilder = () => {
               </TableRow>
             </TableFooter>
           </Table>
+          <div className='hidden'>
+            <InvoiceTemplate
+              CompanyDetails={companyDetails}
+              CustomerDetails={customerDetails}
+              Items={items}
+              invoiceDate={invoiceDate}
+              invoiceNumber={invoiceNumber}
+              GST={gst}
+              itemsTotal={allTotal}
+              invoiceRef={invoiceRef}
+            />
+          </div>
         </div>
       </div>
     </div>

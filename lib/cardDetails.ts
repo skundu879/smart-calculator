@@ -1128,4 +1128,11 @@ export const cardDetailsObj: Array<CardProps> = [
       },
     },
   },
+  {
+    cardTitle: 'Invoice',
+    cardDescription: 'Invoice Generator',
+    cardContent: 'Create professional invoices for your business with ease.',
+    cardIcon: 'undraw_receipt.svg',
+    cardUrl: '/Invoice',
+  },
 ];
