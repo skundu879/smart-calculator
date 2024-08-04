@@ -6,13 +6,13 @@ export type CardProps = {
   cardContent: String;
   cardIcon: string;
   cardUrl: string;
-  calculationDetails: {
+  calculationDetails?: {
     tabsList: Array<string>;
     accordionList?: Array<{
       id: number;
       title: string;
     }>;
-    inputFields: {
+    inputFields?: {
       [key: string]: Array<{
         id: number;
         accordionId?: number;
@@ -38,13 +38,13 @@ export type CardProps = {
           | 'checkbox';
       }>;
     };
-    formulas: {
+    formulas?: {
       [key: string]: {
         params: Array<string>;
         formula: string;
       };
     };
-    results: {
+    results?: {
       [key: string]: {
         displayList: Array<{
           params: Array<string>;

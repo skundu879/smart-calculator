@@ -5,8 +5,8 @@ type Invoice = {
   Items: [
     { id: number; item: string; quantity: number; price: number; total: number }
   ];
-  CompanyDetails: { name: string; address: string };
-  CustomerDetails: { name: string; address: string };
+  CompanyDetails: { CName: string; CPhone: string; CAddress: string };
+  CustomerDetails: { name: string; phone: string; address: string };
   GST?: number;
   invoiceDate: string;
   invoiceNumber: number;
@@ -15,8 +15,8 @@ type Invoice = {
 
 const initialState: Invoice = {
   Items: [{ id: 1, item: '', quantity: 0, price: 0, total: 0 }],
-  CompanyDetails: { name: '', address: '' },
-  CustomerDetails: { name: '', address: '' },
+  CompanyDetails: { CName: '', CPhone: '', CAddress: '' },
+  CustomerDetails: { name: '', phone: '', address: '' },
   isCompanyDetailsSaved: true,
   GST: 0,
   invoiceDate: format(new Date(), 'yyyy-MM-dd'),
