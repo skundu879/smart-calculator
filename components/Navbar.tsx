@@ -28,6 +28,12 @@ const Navbar = () => {
       </Link>
       <nav className=' hidden md:flex flex-row gap-6 '>
         <Link
+          href='/Invoice'
+          className='text-slate-950'
+        >
+          Invoice Builder
+        </Link>
+        <Link
           href='/about'
           className='text-slate-950'
         >
@@ -62,6 +68,13 @@ const Navbar = () => {
               color='white'
             />
           </button>
+          <Link
+            href='/Invoice'
+            className='text-white hover:text-gray-400 text-2xl mb-4'
+            onClick={closeMenu}
+          >
+            Invoice Builder
+          </Link>
           <Link
             href='/about'
             className='text-white hover:text-gray-400 text-2xl mb-4'
