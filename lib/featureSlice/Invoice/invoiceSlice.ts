@@ -11,6 +11,7 @@ type Invoice = {
   invoiceDate: string;
   invoiceNumber: number;
   isCompanyDetailsSaved: boolean;
+  digitalSignature?: string;
 };
 
 const initialState: Invoice = {
@@ -21,6 +22,7 @@ const initialState: Invoice = {
   GST: 0,
   invoiceDate: format(new Date(), 'yyyy-MM-dd'),
   invoiceNumber: 1000,
+  digitalSignature: '',
 };
 
 const InvoiceSlice = createSlice({
@@ -67,6 +69,15 @@ const InvoiceSlice = createSlice({
       );
       state.isCompanyDetailsSaved = true;
     },
+    saveDigitalSignature(state, action) {
+      state.digitalSignature = action.payload;
+    },
+    resetSignature(state) {
+      state.digitalSignature = '';
+    },
+    updateInvoiceNumber(state, action) {
+      state.invoiceNumber = action.payload;
+    },
   },
 });
 
@@ -78,6 +89,9 @@ export const {
   updateGST,
   updateItem,
   saveCompanyDetails,
+  saveDigitalSignature,
+  resetSignature,
+  updateInvoiceNumber,
 } = InvoiceSlice.actions;
 export default InvoiceSlice.reducer;
 
@@ -133,4 +147,9 @@ export const totalSelector = createSelector(
       },
       { subTotal: 0, gst: 0, total: 0 }
     )
+);
+
+export const signatureSelector = createSelector(
+  (state: Invoice) => state.digitalSignature,
+  (signature) => signature
 );

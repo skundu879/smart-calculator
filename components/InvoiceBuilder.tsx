@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import Image from 'next/image';
 import { Input } from '@/components/ui/input';
@@ -25,6 +25,9 @@ import {
   saveCompanyDetails,
   updateCustomerDetails,
   updateGST,
+  saveDigitalSignature,
+  resetSignature,
+  updateInvoiceNumber,
   itemsSelector,
   companyDetailsSelector,
   customerDetailsSelector,
@@ -32,8 +35,11 @@ import {
   totalSelector,
   invoiceDateSelector,
   invoiceNumberSelector,
+  signatureSelector,
 } from '@/lib/featureSlice/Invoice/invoiceSlice';
 import { useToast } from '@/components/ui/use-toast';
+import DigitalSign from './DigitalSign';
+import SignDialog from './SignDialog';
 import InvoiceTemplate from './InvoiceTemplate';
 
 type Items = [
@@ -49,12 +55,17 @@ type updateItem = (index: number, key: string, value: string | number) => void;
 
 const InvoiceBuilder = () => {
   const invoiceRef = useRef(null);
+  const sigCanvasRef = useRef({} as any);
+  const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { toast } = useToast();
   const items: Items = useAppSelector((state) => itemsSelector(state.invoice));
   const companyDetails = useAppSelector((state) =>
     companyDetailsSelector(state.invoice)
   );
+  const companyButtonlabel = companyDetails.CName
+    ? 'Change Company'
+    : 'Add Company';
   const customerDetails = useAppSelector((state) =>
     customerDetailsSelector(state.invoice)
   );
@@ -66,7 +77,8 @@ const InvoiceBuilder = () => {
   );
   const gst = useAppSelector((state) => gstSelector(state.invoice));
   const allTotal = useAppSelector((state) => totalSelector(state.invoice));
-
+  const signature = useAppSelector((state) => signatureSelector(state.invoice));
+  const signLable = signature ? 'Change Signature' : 'Add Signature';
   const handlePrint = useReactToPrint({
     content: () => invoiceRef.current,
   });
@@ -103,8 +115,36 @@ const InvoiceBuilder = () => {
     });
   };
 
+  const handleSaveSignature = () => {
+    const sig = sigCanvasRef.current
+      ?.getTrimmedCanvas()
+      ?.toDataURL('image/png');
+    dispatch(saveDigitalSignature(sig));
+    localStorage.setItem('signature', sig);
+    toast({
+      variant: 'default',
+      description: 'Your signature has been saved locally.',
+      duration: 2000,
+    });
+    setOpen(false);
+  };
+  const handleClearSignature = () => {
+    sigCanvasRef.current?.clear();
+    localStorage.setItem('signature', '');
+    dispatch(resetSignature());
+  };
+
+  const onModelChange = () => {
+    setOpen(!open);
+  };
+  const handleInvoiceNumber = (invNumber: number) => {
+    localStorage.setItem('invoiceNumber', (invNumber + 1).toString());
+    dispatch(updateInvoiceNumber(invNumber + 1));
+  };
   useEffect(() => {
     const localStorageValue = localStorage.getItem('companyDetails');
+    const signature = localStorage.getItem('signature');
+    const invoiceNumber = localStorage.getItem('invoiceNumber');
     const parsedValue = localStorageValue
       ? JSON.parse(localStorageValue)
       : null;
@@ -113,6 +153,12 @@ const InvoiceBuilder = () => {
       parsedValue.CAddress &&
         handleComapnyDetails('CAddress', parsedValue.CAddress);
       parsedValue.CPhone && handleComapnyDetails('CPhone', parsedValue.CPhone);
+    }
+    if (signature) {
+      dispatch(saveDigitalSignature(signature));
+    }
+    if (invoiceNumber) {
+      dispatch(updateInvoiceNumber(Number(invoiceNumber)));
     }
   }, []);
 
@@ -133,7 +179,12 @@ const InvoiceBuilder = () => {
           </div>
         </div>
 
-        <CustomButton onClick={handlePrint}>
+        <CustomButton
+          onClick={() => {
+            handleInvoiceNumber(invoiceNumber);
+            handlePrint();
+          }}
+        >
           <Image
             src='/svg/print.svg'
             alt='Print'
@@ -181,7 +232,7 @@ const InvoiceBuilder = () => {
               </div>
               <div className='flex justify-start'>
                 <CustomButton onClick={handleSaveCompany}>
-                  Save Company
+                  {companyButtonlabel}
                 </CustomButton>
               </div>
             </div>
@@ -366,13 +417,27 @@ const InvoiceBuilder = () => {
               invoiceNumber={invoiceNumber}
               GST={gst}
               itemsTotal={allTotal}
-              invoiceRef={invoiceRef}
+              signature={signature}
+              ref={invoiceRef}
             />
           </div>
+        </div>
+        <div className='flex justify-end mt-4'>
+          <SignDialog
+            onModelChange={onModelChange}
+            open={open}
+            label={signLable}
+            title='Sign Here'
+            description='Sign here to confirm the invoice'
+            handleSave={handleSaveSignature}
+            handleClear={handleClearSignature}
+          >
+            {<DigitalSign ref={sigCanvasRef} />}
+          </SignDialog>
         </div>
       </div>
     </div>
   );
 };
 
-export default InvoiceBuilder;
+export default React.forwardRef(InvoiceBuilder);
