@@ -28,9 +28,7 @@ export default function RootLayout({
             <StoreProvider>
               <div className='flex flex-col items-center min-h-svh justify-between'>
                 <Navbar />
-                <div className='sm:container mt-16 justify-start'>
-                  {children}
-                </div>
+                <div className='sm:container mt-16 w-full'>{children}</div>
                 <div className='w-full justify-end'>
                   <Footer />
                 </div>

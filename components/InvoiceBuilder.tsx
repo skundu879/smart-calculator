@@ -6,6 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import CustomButton from './CustomButton';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -87,7 +96,7 @@ const InvoiceBuilder = () => {
     dispatch(addItem());
   };
   const handleRemoveItem = (index: number) => {
-    dispatch(removeItem(index));
+    dispatch(removeItem({ index }));
   };
   const handleUpdateItem = (
     index: number,
@@ -163,45 +172,48 @@ const InvoiceBuilder = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className='sm:text-3xl text-xl font-bold text-center mb-6'>
-        Invoice Builder
-      </h1>
-      <div className='flex flex-row justify-between space-x-2 sm:mb-4 mb-3 items-center'>
-        <div className='mb-2 sm:text-2xl text-sm font-semibold flex flex-col gap-1'>
-          <div className='flex gap-1'>
-            <h2 className='font-bold'>Invoice Date:</h2>
-            <p className='text-gray-600'>{invoiceDate}</p>
+    <Card>
+      <CardHeader className='text-center'>
+        <CardTitle className=' text-xl font-bold '>Invoice Builder</CardTitle>
+        <CardDescription className='text-xs'>
+          {' '}
+          Enter the details below to create your invoice.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className='flex flex-row justify-between space-x-2 sm:mb-4 mb-3 items-center'>
+          <div className='mb-2 sm:text-xl text-sm flex flex-col gap-1'>
+            <div className='flex gap-1'>
+              <h4 className='font-medium'>Invoice Date:</h4>
+              <p className='text-gray-600'>{invoiceDate}</p>
+            </div>
+            <div className='flex gap-1'>
+              <h4 className='font-medium'>Invoice No:</h4>
+              <p className='text-gray-600'>{invoiceNumber}</p>
+            </div>
           </div>
-          <div className='flex gap-1'>
-            <h2 className='font-bold'>Invoice No:</h2>
-            <p className='text-gray-600'>{invoiceNumber}</p>
-          </div>
+
+          <CustomButton
+            onClick={() => {
+              handleInvoiceNumber(invoiceNumber);
+              handlePrint();
+            }}
+          >
+            <Image
+              src='/svg/print.svg'
+              alt='Print'
+              width={16}
+              height={16}
+            />
+            <span>Print</span>
+          </CustomButton>
         </div>
-
-        <CustomButton
-          onClick={() => {
-            handleInvoiceNumber(invoiceNumber);
-            handlePrint();
-          }}
-        >
-          <Image
-            src='/svg/print.svg'
-            alt='Print'
-            width={16}
-            height={16}
-          />
-          <span>Print</span>
-        </CustomButton>
-      </div>
-      <div className='bg-white shadow-lg rounded-lg pb-6'>
-        <div className='flex flex-row justify-between gap-2 mb-2'>
-          <div>
-            <h3 className='sm:text-2xl text-base font-semibold mb-2'>
-              Company Details:
-            </h3>
-
-            <div className='flex flex-col gap-2'>
+        <div className='pb-6'>
+          <div className='flex flex-row justify-between gap-2 mb-2'>
+            <div>
+              <h3 className='sm:text-2xl text-base font-semibold mb-2'>
+                Company Details:
+              </h3>
               <div className='flex flex-col gap-2'>
                 <Input
                   type='text'
@@ -229,19 +241,15 @@ const InvoiceBuilder = () => {
                     handleComapnyDetails('CAddress', e.target.value)
                   }
                 />
-              </div>
-              <div className='flex justify-start'>
                 <CustomButton onClick={handleSaveCompany}>
                   {companyButtonlabel}
                 </CustomButton>
               </div>
             </div>
-          </div>
-          <div>
-            <h3 className='sm:text-2xl text-base font-semibold mb-2'>
-              Customer Details:
-            </h3>
-            <div className='flex flex-col gap-2'>
+            <div>
+              <h3 className='sm:text-2xl text-base font-semibold mb-2'>
+                Customer Details:
+              </h3>
               <div className='flex flex-col gap-2'>
                 <Input
                   id='name'
@@ -272,171 +280,195 @@ const InvoiceBuilder = () => {
                     handleCustomerDetails('address', e.target.value)
                   }
                 />
-              </div>
-              <div className='flex justify-end items-center gap-1'>
-                <span className='font-medium text-sm'>GST %:</span>
-                <Input
-                  type='number'
-                  value={gst}
-                  placeholder='GST %'
-                  className='h-8 sm:w-24 w-20'
-                  onChange={(e) => handleGST(parseFloat(e.target.value))}
-                />
+                <div className='flex justify-end items-center gap-1'>
+                  <span className='font-medium text-sm'>GST %:</span>
+                  <Input
+                    type='number'
+                    value={gst}
+                    placeholder='GST %'
+                    className='h-8 sm:w-24 w-20'
+                    onChange={(e) => handleGST(parseFloat(e.target.value))}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <Table className='max-w-full'>
-            <TableCaption className='text-slate-400'>
-              --- Invoice Items ---
-            </TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Item</TableHead>
-                <TableHead>QTY</TableHead>
-                <TableHead>Price</TableHead>
-                <TableHead className='text-right'>Total</TableHead>
-                <TableHead className='p-0 text-right'>
-                  <Image
-                    src='/svg/trash.svg'
-                    alt='Delete'
-                    width={16}
-                    height={16}
-                  />
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {items.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className='font-medium p-2'>
-                    <Input
-                      placeholder='Item name'
-                      type='text'
-                      value={item.item}
-                      onChange={(e) =>
-                        handleUpdateItem(index, 'item', e.target.value)
-                      }
-                      className='w-full p-1 h-8 border rounded min-w-24'
+          <div>
+            <Table>
+              <TableCaption className='text-slate-400'>
+                --- Invoice Items ---
+              </TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Item</TableHead>
+                  <TableHead>QTY</TableHead>
+                  <TableHead>Price</TableHead>
+                  <TableHead className='text-right'>Total</TableHead>
+                  <TableHead className='p-0 text-right'>
+                    <Image
+                      src='/svg/trash.svg'
+                      alt='Delete'
+                      width={16}
+                      height={16}
                     />
-                  </TableCell>
-                  <TableCell className='font-medium p-2 max-w-28'>
-                    <Input
-                      type='number'
-                      placeholder='Quantity'
-                      value={item.quantity}
-                      onChange={(e) =>
-                        handleUpdateItem(
-                          index,
-                          'quantity',
-                          parseInt(e.target.value) || 0
-                        )
-                      }
-                      className='sm:w-full max-w-14 p-1 h-8 border rounded'
-                    />
-                  </TableCell>
-                  <TableCell className='font-medium p-2 max-w-28'>
-                    <Input
-                      type='number'
-                      placeholder='Price'
-                      value={item.price}
-                      onChange={(e) =>
-                        handleUpdateItem(
-                          index,
-                          'price',
-                          parseFloat(e.target.value) || 0
-                        )
-                      }
-                      className='sm:w-full max-w-24 p-1 h-8 border rounded'
-                    />
-                  </TableCell>
-                  <TableCell className='font-medium p-2'>
-                    <Input
-                      type='number'
-                      placeholder='total'
-                      value={item.total}
-                      onChange={(e) =>
-                        handleUpdateItem(
-                          index,
-                          'total',
-                          parseFloat(e.target.value) || 0
-                        )
-                      }
-                      className='sm:w-full max-w-36 p-1 h-8 border rounded'
-                    />
-                  </TableCell>
-                  <TableCell className='p-0'>
-                    <Button
-                      onClick={() => handleRemoveItem(index)}
-                      className='bg-white hover:bg-red-500 hover:text-white p-1 w-8 h-8'
-                    >
-                      <Image
-                        src='/svg/delete.svg'
-                        alt='Delete'
-                        width={12}
-                        height={12}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {items.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className='font-medium p-2'>
+                      <Input
+                        placeholder='Item name'
+                        type='text'
+                        value={item.item}
+                        onChange={(e) =>
+                          handleUpdateItem(index, 'item', e.target.value)
+                        }
+                        className='w-full p-1 h-8 border rounded min-w-24'
                       />
-                    </Button>
+                    </TableCell>
+                    <TableCell className='font-medium p-2 max-w-28'>
+                      <Input
+                        type='number'
+                        placeholder='Quantity'
+                        value={item.quantity}
+                        onChange={(e) =>
+                          handleUpdateItem(
+                            index,
+                            'quantity',
+                            parseInt(e.target.value) || 0
+                          )
+                        }
+                        className='sm:w-full max-w-14 p-1 h-8 border rounded'
+                      />
+                    </TableCell>
+                    <TableCell className='font-medium p-2 max-w-28'>
+                      <Input
+                        type='number'
+                        placeholder='Price'
+                        value={item.price}
+                        onChange={(e) =>
+                          handleUpdateItem(
+                            index,
+                            'price',
+                            parseFloat(e.target.value) || 0
+                          )
+                        }
+                        className='sm:w-full max-w-24 p-1 h-8 border rounded'
+                      />
+                    </TableCell>
+                    <TableCell className='font-medium p-2'>
+                      <Input
+                        type='number'
+                        placeholder='total'
+                        value={item.total}
+                        onChange={(e) =>
+                          handleUpdateItem(
+                            index,
+                            'total',
+                            parseFloat(e.target.value) || 0
+                          )
+                        }
+                        className='sm:w-full max-w-36 p-1 h-8 border rounded'
+                      />
+                    </TableCell>
+                    <TableCell className='p-0'>
+                      <Button
+                        onClick={() => handleRemoveItem(index)}
+                        className='bg-white hover:bg-red-500 hover:text-white p-1 w-8 h-8'
+                      >
+                        <Image
+                          src='/svg/delete.svg'
+                          alt='Delete'
+                          width={12}
+                          height={12}
+                        />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TableCell colSpan={1}>
+                    {' '}
+                    <CustomButton onClick={handleAddItem}>
+                      Add Item
+                    </CustomButton>
+                  </TableCell>
+                  <TableCell colSpan={4}>
+                    {' '}
+                    <div className='text-right'>
+                      <div className='flex justify-end mb-1 gap-1 font-semibold text-yellow-600'>
+                        <span>Subtotal:</span>
+                        <span>{allTotal.subTotal.toFixed(2)}</span>
+                      </div>
+                      <div className='flex justify-end mb-1 gap-1 font-semibold text-red-600'>
+                        <span>GST:</span>
+                        <span>{allTotal.gst.toFixed(2)}</span>
+                      </div>
+                      <div className='flex justify-end font-bold text-lg gap-1 text-green-600'>
+                        <span>Total:</span>
+                        <span>{allTotal.total.toFixed(2)}</span>
+                      </div>
+                    </div>
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TableCell colSpan={1}>
+              </TableFooter>
+            </Table>
+            <div className='hidden'>
+              <InvoiceTemplate
+                CompanyDetails={companyDetails}
+                CustomerDetails={customerDetails}
+                Items={items}
+                invoiceDate={invoiceDate}
+                invoiceNumber={invoiceNumber}
+                GST={gst}
+                itemsTotal={allTotal}
+                signature={signature}
+                ref={invoiceRef}
+              />
+            </div>
+          </div>
+          <div className='flex justify-between items-center mt-4'>
+            <Card>
+              <CardHeader className='py-2 '>
+                <CardTitle className='sm:text-sm text-xs'>
                   {' '}
-                  <CustomButton onClick={handleAddItem}>Add Item</CustomButton>
-                </TableCell>
-                <TableCell colSpan={4}>
-                  {' '}
-                  <div className='text-right'>
-                    <div className='flex justify-end mb-1 gap-1 font-semibold text-yellow-600'>
-                      <span>Subtotal:</span>
-                      <span>{allTotal.subTotal.toFixed(2)}</span>
-                    </div>
-                    <div className='flex justify-end mb-1 gap-1 font-semibold text-red-600'>
-                      <span>GST:</span>
-                      <span>{allTotal.gst.toFixed(2)}</span>
-                    </div>
-                    <div className='flex justify-end font-bold text-lg gap-1 text-green-600'>
-                      <span>Total:</span>
-                      <span>{allTotal.total.toFixed(2)}</span>
-                    </div>
-                  </div>
-                </TableCell>
-              </TableRow>
-            </TableFooter>
-          </Table>
-          <div className='hidden'>
-            <InvoiceTemplate
-              CompanyDetails={companyDetails}
-              CustomerDetails={customerDetails}
-              Items={items}
-              invoiceDate={invoiceDate}
-              invoiceNumber={invoiceNumber}
-              GST={gst}
-              itemsTotal={allTotal}
-              signature={signature}
-              ref={invoiceRef}
-            />
+                  Current Signature
+                </CardTitle>
+              </CardHeader>
+              <CardContent className=' flex p-2  justify-center'>
+                {' '}
+                {signature ? (
+                  <Image
+                    className='w-18 h-16 sm:w-24 sm:h-20 object-contain'
+                    src={signature}
+                    alt='signature'
+                    width={80}
+                    height={40}
+                  />
+                ) : (
+                  <p className='text-gray-400'>No Signature</p>
+                )}
+              </CardContent>
+            </Card>
+            <SignDialog
+              onModelChange={onModelChange}
+              open={open}
+              label={signLable}
+              title='Sign Here'
+              description='Sign here to confirm the invoice'
+              handleSave={handleSaveSignature}
+              handleClear={handleClearSignature}
+            >
+              {<DigitalSign ref={sigCanvasRef} />}
+            </SignDialog>
           </div>
         </div>
-        <div className='flex justify-end mt-4'>
-          <SignDialog
-            onModelChange={onModelChange}
-            open={open}
-            label={signLable}
-            title='Sign Here'
-            description='Sign here to confirm the invoice'
-            handleSave={handleSaveSignature}
-            handleClear={handleClearSignature}
-          >
-            {<DigitalSign ref={sigCanvasRef} />}
-          </SignDialog>
-        </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
