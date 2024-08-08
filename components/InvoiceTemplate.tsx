@@ -102,18 +102,18 @@ const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceProps>(
                   Thanks for your purchase!
                 </p>
               </TableCell>
+              <TableCell className='text-right font-semibold'>
+                <p>Subtotal: {itemsTotal.subTotal.toFixed(2)}</p>
+                <p>GST: {GST?.toFixed(2)}%</p>
+                <p className='font-bold text-lg'>
+                  Total: {itemsTotal.total.toFixed(2)}
+                </p>
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>
 
         {/* Totals */}
-        <div className='mt-4 text-right'>
-          <p>Subtotal: {itemsTotal.subTotal}</p>
-          <p>
-            GST({GST}%) : {itemsTotal.gst.toFixed(2)}
-          </p>
-          <p className='font-bold'>Total: {itemsTotal.total.toFixed(2)}</p>
-        </div>
 
         {/* Payment information */}
         <div className='flex justify-between mt-20'>
