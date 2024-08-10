@@ -174,8 +174,10 @@ const InvoiceBuilder = () => {
   return (
     <Card>
       <CardHeader className='text-center'>
-        <CardTitle className=' text-xl font-bold '>Invoice Builder</CardTitle>
-        <CardDescription className='text-xs'>
+        <CardTitle className='text-xl sm:text-2xl font-bold '>
+          Invoice Builder
+        </CardTitle>
+        <CardDescription className='text-xs sm:text-sm'>
           {' '}
           Enter the details below to create your invoice.
         </CardDescription>
@@ -211,9 +213,9 @@ const InvoiceBuilder = () => {
         <div className='pb-6'>
           <div className='flex flex-row justify-between gap-2 mb-2'>
             <div>
-              <h3 className='sm:text-2xl text-base font-semibold mb-2'>
+              <p className='sm:text-2xl text-base font-semibold mb-2'>
                 Company Details:
-              </h3>
+              </p>
               <div className='flex flex-col gap-2'>
                 <Input
                   type='text'
@@ -247,9 +249,9 @@ const InvoiceBuilder = () => {
               </div>
             </div>
             <div>
-              <h3 className='sm:text-2xl text-base font-semibold mb-2'>
+              <p className='sm:text-2xl text-base font-semibold mb-2'>
                 Customer Details:
-              </h3>
+              </p>
               <div className='flex flex-col gap-2'>
                 <Input
                   id='name'
