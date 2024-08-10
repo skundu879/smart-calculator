@@ -104,7 +104,11 @@ const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceProps>(
               </TableCell>
               <TableCell className='text-right font-semibold'>
                 <p>Subtotal: {itemsTotal.subTotal.toFixed(2)}</p>
-                <p>GST: {GST?.toFixed(2)}%</p>
+                {GST && GST > 0 ? (
+                  <p>
+                    GST({GST}%): {itemsTotal.gst.toFixed(2)}
+                  </p>
+                ) : null}
                 <p className='font-bold text-lg'>
                   Total: {itemsTotal.total.toFixed(2)}
                 </p>
@@ -116,35 +120,31 @@ const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceProps>(
         {/* Totals */}
 
         {/* Payment information */}
-        <div className='flex justify-between mt-20'>
-          <div className='mt-4'>
-            <p>Payment due within 30 days.</p>
-            <p className='font-thin text-xs'>
-              **Items sold are non-returnable after 7 days.
-            </p>
+        <div className='flex justify-between mt-6 items-center'>
+          <div className='text-slate-600'>
+            <p className='text-sm'>Payment due within 30 days.</p>
+            <p className='font-thin text-xs '>No returns after 7 days.</p>
           </div>
-          <div className='border-2 rounded border-gray-200 border-dashed align-middle p-6 relative text-center w-36 '>
+          {/* signature sections */}
+          <div>
+            <div className='border-2 rounded border-gray-200 border-dashed align-middle p-6 relative text-center w-36 mb-2'>
+              {signature && (
+                <Image
+                  src={signature}
+                  alt='signature'
+                  width={80}
+                  height={40}
+                />
+              )}
+              <p className='text-slate-300 absolute text-center'>signature</p>
+            </div>
             {signature && (
-              <Image
-                src={signature}
-                alt='signature'
-                width={80}
-                height={40}
-              />
+              <p className='text-center text-xs text-slate-400'>
+                *Digitally signed*
+              </p>
             )}
-            <p className='text-slate-400 absolute'>signature</p>
           </div>
         </div>
-        {/* signature disclaimer */}
-        {signature && (
-          <div className='mt-6'>
-            <p className='text-center mt-4'>
-              <span className='text-xs text-slate-500'>
-                **This invoice has been electronically signed**
-              </span>
-            </p>
-          </div>
-        )}
       </div>
     );
   }
