@@ -90,6 +90,24 @@ const InvoiceBuilder = () => {
   const signLable = signature ? 'Change Signature' : 'Add Signature';
   const handlePrint = useReactToPrint({
     content: () => invoiceRef.current,
+    documentTitle: 'Invoice',
+    pageStyle() {
+      return `
+        @page {
+          size: A4;
+          margin: 0;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Arial', sans-serif;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+          `;
+    },
   });
 
   const handleAddItem = () => {

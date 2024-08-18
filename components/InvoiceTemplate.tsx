@@ -10,6 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Image from 'next/image';
+import CurvedText from '@/components/CircularText';
 
 type InvoiceProps = {
   Items: [
@@ -40,11 +41,26 @@ const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceProps>(
       itemsTotal,
       signature,
     } = props;
+    const getFontSizeClass = (text: string) => {
+      const length = text.length;
+      if (length <= 10) return 'text-6xl';
+      if (length <= 20) return 'text-5xl';
+      if (length <= 30) return 'text-4xl';
+      if (length <= 40) return 'text-3xl';
+      return 'text-2xl';
+    };
+    const fontSizeClass = getFontSizeClass(CompanyDetails.CName);
     return (
       <div
-        className='max-w-screen-md mx-auto p-8'
+        className='relative max-w-screen-md mx-auto p-8 bg-transparent'
         ref={ref}
       >
+        <div
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold pointer-events-none -z-[1] ${fontSizeClass}`}
+        >
+          <CurvedText text={CompanyDetails.CName} />
+          {/* {CompanyDetails.CName} */}
+        </div>
         <h1 className='text-4xl font-medium text-center mb-4'>Invoice</h1>
         <header className='flex justify-between items-center'>
           <div>
@@ -92,7 +108,7 @@ const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceProps>(
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
+          <TableFooter className='bg-transparent'>
             <TableRow>
               <TableCell
                 colSpan={4}
